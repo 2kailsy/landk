@@ -56,7 +56,7 @@
         <el-card shadow="hover" style="max-width: 250px;">
             <el-form :model="login" :rules="logins" ref="login" label-width="40px" class="login-ruleForm">
                 <el-form-item label="账号" prop="usr">
-                    <el-input v-model="login.usr" name="usr" auto-complete="on"></el-input>
+                    <el-input v-model="login.usr" @keyup.enter.native="submitForm('login')" name="usr" auto-complete="on"></el-input>
                 </el-form-item>
                 <el-form-item label="密码" prop="pwd">
                     <el-input v-model="login.pwd" @keyup.enter.native="submitForm('login')" show-password></el-input>
