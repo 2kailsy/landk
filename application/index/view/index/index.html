@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>刘思雨💕南泽康</title>
+    <link rel="stylesheet" href="/static/css/elementUI.css">
+    <link rel="stylesheet" href="/static/index/css/loading.css">
+    <link rel="stylesheet" href="/static/index/css/nav.css">
+    <style>
+        *{padding: 0;margin: 0;box-sizing: border-box;}
+        *::-webkit-scrollbar{display: none;}
+        h2{margin: 0;}
+        :root{--maincol:rgba(252,253,214,0.5);--secocol:rgba(254,254,229,0.5);}
+        body{
+            width: 100%;
+            height: 100vh;
+            background: url('/static/img/2022-12-05_21-37-35.jpg') no-repeat;
+            background-size: 100% 100%;
+            background-attachment: fixed;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        /* 爱心 */
+        #frame{position: fixed;width: 400px;height: 300px;margin: 280px -12px;z-index: 0;}
+        .h_left,.h_right{top: 0;width: 200px;height: 200px;border-radius: 50%;}
+        .h_left{left: 35px;}
+        .h_right{right: 35px;z-index: -1;}
+        .h_bottom{bottom: 36px;left: 100px;width: 200px;height: 200px;transform: rotate(45deg);z-index: -1;}
+        .heart{position: absolute;box-shadow:0 0 40px #d5093c;animation: beat .8s ease infinite normal;background: linear-gradient(-90deg, #F50A45 0%, #d5093c 40%);}
+        @keyframes beat {
+            0%{transform: scale(1) rotate(225deg);box-shadow:0 0 40px #d5093c;}
+            50%{transform: scale(1.1) rotate(225deg);box-shadow: 0 0 70px #d5093c;}
+            100%{transform: scale(1) rotate(225deg);box-shadow: 0 0 40px #d5093c;}
+        }
+        /* 爱心 */
+        /*“我的”页面css*/
+        .ln_my{position: fixed;top: 0;left: 0;width: 100%;height: 100%;background-color: #fff;z-index: 4;display: flex;flex-direction: column;align-items: center;}
+        .ln_my_top{position: relative;top: 0;left: 0;width:100%;display:flex;justify-content: center;align-items: center;}
+        .ln_my_top>img{display: block;position:relative;border-bottom: 1px solid #ddd;}
+        .ln_my_top_head{position: absolute;top: 30px;}
+        .ln_my_top>h2{position: absolute;top: 120px;font-weight: bold;color: #fff;padding: 0 12px;overflow: hidden;text-overflow: ellipsis;white-space: nowarp;width: 100%;text-align: center;}
+        .ln_my_top>h4{position: absolute;top: 165px;font-weight: bold;text-align: center;}
+        .ln_my_top_head>img{background-color: #fff;border-radius: 50%;border: 1px solid #d1d1d1;box-shadow: 0 10px 40px #d1d1d1;}
+        .ln_my_top_head>.icon{background-color: rgba(255,255,255,1);width: 20px;height: 20px;padding: 2px;border-radius: 50%;position: absolute;bottom:0;right:0;}
+        .ln_my>*{user-select: none;}
+        .ln_my_body{flex: 1;width: 100%;display: flex;flex-direction: column;align-items: center;}
+        .ln_my_body_items{width: 100%;height: 50px;border-bottom: 1px solid #ddd;position: relative;line-height: 50px;text-indent: 12px;}
+        .ln_my_body_items:after{content:'>';position: absolute;color: #b1b1b1;font-weight: bolder;font-size: 28px;margin-top: -8px;right: 10px;bottom: 0;}
+
+        .el-dialog{width: 100vw!important;height: calc(100vh - 65px)!important;margin-top: 0!important;}
+        .el-date-editor{width: 100%!important;}
+        .el-dialog__body{padding-top: 10px!important;height: calc(100% - 65px);overflow: scroll;}
+        .passwordChange>.el-dialog>.el-dialog__body{
+            height: calc( 100% - 65px )!important;
+            display: flex!important;
+            justify-content: flex-start!important;
+            align-items: center!important;
+            padding: 20px;
+            flex-direction: column;
+        }
+        .blod_20{font-weight: bold;font-size: 20px;}
+        /*“我的”页面css*/
+        /*头像上传样式*/
+        .avatar-uploader .el-upload {
+            border: 1px dashed #d9d9d9;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .avatar-uploader .el-upload:hover{border-color: #409EFF;}
+        .avatar-uploader-icon {
+            font-size: 28px;
+            color: #8c939d;
+            width: 178px;
+            height: 178px;
+            line-height: 178px;
+            text-align: center;
+        }
+        .avatar {
+            width: 178px;
+            height: 178px;
+            display: block;
+        }
+        /*头像上传样式*/
+        /* elementUI适配 */
+        .el-message-box{width: 70%;max-width: 420px;}
+        /* elementUI适配 */
+    </style>
+    <style>
+        #ln{
+            width: 100%;
+            height: 100%;
+        }
+        .ln_index{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            height: calc(100% - 125px);
+            padding: 24px 12px 30px;
+            position: relative;
+            overflow: hidden;
+            overflow-y: overlay;
+        }
+        .ln_search{
+            display: flex;
+            align-items: center;
+            height: 50px;
+            width: 96%;
+            max-width: 540px;
+            background-color: var(--maincol);
+            border: 2px solid #000;
+            top: 24px;
+            left: 50%;
+            position: relative;
+            margin-bottom: 12px;
+            width: 91%;
+            transform: translateX(-50%);
+            z-index: 4;
+        }
+        /* 主样式 */
+        .ln_box{
+            display: flex;
+            flex-direction: column;
+            /* min-height: 150px; */
+            background-color: var(--secocol);
+            width: 96%;
+            max-width: 540px;
+            border: 2px solid #000;
+            margin-bottom: 12px;
+        }
+        .ln_title{
+            background-color: var(--maincol);
+            border-radius: inherit;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            text-indent: 12px;
+            font-size: 30px;
+            min-height: 45px;
+            max-height: 45px;
+            height: 45px;
+            line-height: 41px;
+            user-select: none;
+            word-break: keep-all;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
+        }
+        .ln_title.t_center{
+            justify-content: center;
+        }
+        .border_title{
+            border-bottom: 2px solid #000;
+        }
+        .ln_input{
+            height: 100%;
+            /* background: var(--secocol); */
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            outline: none;
+            font-size: 18px;
+            line-height: 18px;
+            text-indent: 12px;
+            border-radius: inherit;
+        }
+        textarea.ln_input{
+            padding-top: 16px !important;
+            height: 250px !important;
+            resize: none;
+        }
+        *{
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ln_btn{
+            cursor: pointer; 
+            /* bug */
+            user-select: none;
+            font-size: 20px;
+            min-width: 92px;
+            text-align: center;
+            padding: 0 8px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            background-color: var(--maincol);
+            outline: none;
+            border: none;
+            border-radius: inherit;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            justify-content: center;
+        }
+        .ln_btn.white{color: #fff;}
+        .ln_btn.red{color: red;}
+        .ln_btn.disabled{background-color: rgba(167, 162, 162, 0.6);cursor: no-drop;}
+        .bold{font-weight: bold;}
+        .border-right{border-right: 2px solid #000;border-top-right-radius: 0;border-bottom-right-radius: 0;}
+        .ln_content{
+            max-height: 400px;
+            overflow: hidden;
+            overflow-y: overlay;
+            flex: 1;
+            word-wrap: break-word;
+            word-break: break-all;
+            padding: 8px 12px;
+            position: relative;
+        }
+        .ln_content>img{
+            float: left;
+            margin-right: 4px;
+            width: 100px;
+        }
+        .ln_content>div>img{
+            max-width: 200px;
+        }
+        .ln_content .author{
+            color: rgb(180,180,180);
+            float: right;
+        }
+        .ln_content>div{
+            font-size: 18px;
+            font-weight: bolder;
+        }
+        e{color: red;font-weight: bolder}
+        ii{color: rgb(116, 219, 229);font-size: 16px;font-style: italic;}
+        ee{color: rgb(21, 254, 36);font-weight: bolder}
+        .t_center{text-align: center;}
+        /* 日历start */
+        .evrday{
+	        width:14%;     
+		    float:left;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 8px;
+        }
+        .calendar_h{display: flex;align-items: center;position: relative;}
+        .calendar_h>span{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-indent: 0;
+        }
+        .calendar_h>span:first-child{padding-left: 12px;}
+        .calendar_h>span:last-child{padding-right: 12px;}
+        .calendar_h::after{
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            border: 23px solid rgba(230, 128, 138,0.8);
+            border-left-color: transparent;
+            border-bottom-color: transparent;
+            pointer-events: none;
+        }
+        .duanqian{
+            position: absolute;
+            right: 5px;
+            color: rgb(248, 156, 14);
+            font-weight: bolder;
+            top: -11px;
+            transform: rotate(45deg);
+            font-size: 16px;
+            z-index: 1;
+            text-indent: 20px !important;
+            padding-right: 0 !important;
+            pointer-events: none;
+        }
+        /* 日历end */
+        /* LSY💕NZK start */
+        .landk_top{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .landk_top>img{
+            width: 50%;
+            z-index: 2;
+        }
+        .love_box{
+            position: relative;
+            top: 5px;
+            z-index: 0;
+        }
+        .love,.love::before,.love::after{
+            content: '';
+            position: absolute;
+            transform: translate(-50%,-50%) rotate(-45deg);
+            width: 25vw;
+            max-width: 110px;
+            border-radius: 50%;
+            z-index: 0;
+            padding-top: 25vw;
+            padding-top: min(110px,25vw);
+            background-color: red;
+        }
+        .love{
+            border-radius: 0;
+        }
+        .love::before{
+            top: 0;
+            left: 50%;
+        }
+        .love::after{
+            top: 50%;
+            left: 100%;
+        }
+        .jishi{
+            font-size: 18px;
+            color: #000;
+            border: none;
+            text-align:center;
+            margin-top: 8px;
+        }
+        .flex_center{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        /* LSY💕NZK end */
+        /* 小纸条 start */
+        .ln_form{
+            display: flex;
+            flex-direction: column;
+        }
+        .ln_form .ln_input{
+            padding: 8px;
+            font-size: 20px;
+            text-indent: 12px;
+            border: none;
+            outline: none;
+            height: 50px;
+            background-color: var(--secocol);
+            font-weight: bolder;
+        }
+        .ln_form .ln_input.center{
+            text-align: center;
+        }
+        .ln_form .ln_btn{
+            padding: 8px;
+            font-size: 20px;
+            text-indent: 12px;
+            border: none;
+            outline: none;
+            height: 50px;
+            background-color: var(--maincol);
+        }
+        /* 小纸条 end */
+        /* 对她说 start(2023/06/10 16:39:47)*/
+        .ln_content > ul>li{
+            font-size: 18px;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+        .ln_content > ul>li:first-child{margin-top: 0;}
+        /* 对她说 end*/
+        /* 少破 start(2023/06/11 17:50:40)*/
+        .shop_card{
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            border-radius: 4px;
+            padding: 8px;
+            width: 46%;
+            margin: 4px;
+            position: relative;
+        }
+        .shop_card>.good>img{
+            width: 100%;
+        }
+        .price{
+            color: #e4393c;
+            display: flex;
+            align-items: center;
+            height: 30px;
+            /* padding: 8px 22px; */
+            margin-left: 12px;
+            box-sizing: border-box;
+            font-size: 16px;
+            font-weight: bolder;
+            user-select: none;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .explanation{
+            color: #c6c6c6;
+            /* padding: 2px 20px; */
+            margin-left: 12px;
+            box-sizing: border-box;
+            user-select: none;
+            height: 60px;
+            overflow: hidden;
+            overflow-y: auto;
+            font-weight: 400;
+            font-size: 16px;
+        }
+        .mask{
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(110,110,110,0.8);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .shop_item{
+            /* width: 18vmin;
+            height: 18vmin; */
+            flex: 1;
+            border-radius: 4px;
+            border: 1px dashed rgb(217, 217, 217);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            float: left;
+            margin: 8px;
+        }
+        .shop_item>img{
+            width: 100%;
+        }
+        .grid{
+            display: grid;
+            grid-template-columns:repeat(2,1fr);
+            grid-gap: 10px;
+            padding-bottom: 200px;
+            /* grid-template-rows: repeat(7,1fr); */
+        }
+        @media screen and (min-width: 480px){
+            .grid{
+                grid-template-columns:repeat(4,1fr);
+            }
+        }
+        .shop_item.active{
+            background-color: var(--secocol);
+            border-color: rgb(120,120,120);
+        }
+        .ln_btn.second{
+            background-color: var(--secocol);
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div id="frame">
+        <div style="margin:0 auto;width: 100%;height:100%;">
+            <div class="heart h_left"></div>
+            <div class="heart h_right"></div>
+            <div class="heart h_bottom"></div>
+        </div>
+    </div>
+    <div id="ln">
+        <!-- 加载(css) -->
+        <div class="loading" v-show="pageInfo.isLoading">
+            <!-- 加载(图片) -->
+            <div class="header">
+                <div class="header-0"></div>
+                <div class="header-1"></div>
+                <div class="header-2"></div>
+                <div class="header-3"></div>
+                <div class="header-4"></div>
+                <div class="header-5"></div>
+                <div class="header-6"></div>
+                <div class="header-7"></div>
+                <div class="header-8"></div>
+            </div>
+            <!-- <img :src="pageInfo.lazyImg" width="200px" style="position: absolute;z-index:1;"> -->
+        </div>
+        <!-- 主页 -->
+        <!-- 搜索strat -->
+        <div class="ln_search">
+            <input class="ln_input border-right bold" style="flex: 1;" placeholder="搜点什么东东叭~" v-model="searchInfo.key" @keyup.enter="search(1,false)">
+            <input class="ln_btn bold" @click="search(1,false)" value="搜索一下" type="button">
+        </div>
+        <!-- 搜索end -->
+        <div class="ln_index" id="ln_home">
+            <!-- 搜索strat -->
+            <div class="ln_box" v-for="search in searchInfo.data" v-if="searchInfo.data.length>0">
+                <h1 class="ln_title border_title"><div v-html="search.title"></div></h1>
+                <div class="ln_content">
+                    <img :src="search.img" v-show="search.img!=''&&search.img!='null'&&search.img!=null" @click="lookPic(search.img)">
+                    <div v-html="search.content"></div>
+                    <span class="author">{{ search.author }}</span>
+                </div>
+            </div>
+            <el-pagination small background layout="prev, pager, next" align="center"
+                @current-change="search" :hide-on-single-page="true"
+                style="margin-bottom: 12px;position:relative;" v-if="searchInfo.data.length>0"
+                :current-page.sync="searchInfo.pn||1" :total="searchInfo.all" :page-size="searchInfo.rn||5">
+            </el-pagination>
+            <!-- 搜索end(2023/06/08 22:31:19 搜索功能完成) -->
+            <!-- 每日想我strat(2023/06/09 19:05:48) -->
+            <div class="ln_box">
+                <h1 class="ln_title border_title t_center calendar_h"><span @click="next(calendar.month,calendar.year,false)">&lt;</span><span @click="showday(new Date())" style="flex: 1;">每日想我</span><span @click="next(calendar.month,calendar.year,true)">&gt;</span><span class="duanqian">{{calendar.all}}</span></h1>
+                <div class="ln_content calendar">
+                    <div @click="showday(new Date())" style="text-align: center;margin-bottom: 4px;font-size: 16px;">{{calendar.year_month}}</div>
+                    <div>
+                        <div class="evrday">日</div>
+                        <div class="evrday">一</div>
+                        <div class="evrday">二</div>
+                        <div class="evrday">三</div>
+                        <div class="evrday">四</div>
+                        <div class="evrday">五</div>
+                        <div class="evrday">六</div>
+                    </div>
+                    <div id="day" style="color:#0FF"></div>
+                    <div :class="`ln_btn radius ${calendar.className}`" style="height: 40px;width: 92%;margin: 0 auto 10px;" @click="qian(calendar.onclick,calendar.onclick1)">{{calendar.str}}</div>
+                </div>
+            </div>
+            <!-- 每日想我end(功能：2023/06/09 23:37:08)(样式：2023/06/10 01:18:28)(上一月下一月：2023/06/10 00:28:57)(几天没签到：2023/06/10 00:43:14) -->
+            <!-- 我问你答 start(2023/06/10 14:28:34) -->
+            <div class="ln_box" v-for="(que,i) in ques">
+                <h1 class="ln_title border_title">我问你答(如实回答)</h1>
+                <div class="ln_content">
+                    <div class="flex_center" style="align-items: flex-start;margin-bottom: 12px;">
+                        <p style="font-size: 20px;">{{que.id}}、{{que.content}}</p>
+                        <ii>---({{que.time}})</ii>
+                    </div>
+                    <div class="ln_form radius">
+                        <input class="ln_input" placeholder="姐姐回答我~" v-model="que.value">
+                        <div class="ln_btn red" @click="answerQue(i)">回答(别忘了点我!)</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 我问你答 end(显示问题：2023/06/11 07:38:57)(全部功能：2023/06/11 07:53:27) -->
+            <!-- 猜猜 start(2023/06/10 14:22:55) -->
+            <div class="ln_box" v-for="(guess,i) in guesses">
+                <h1 class="ln_title border_title">猜一猜</h1>
+                <div class="ln_content">
+                    <div class="flex_center" style="align-items: flex-start;margin-bottom: 12px;">
+                        <p style="font-size: 20px;">{{guess.content}}</p>
+                        <ii>---({{guess.time}})</ii>
+                    </div>
+                    <div class="ln_form radius">
+                        <input class="ln_input" placeholder="答案藏在小网站里呦~" v-model="guess.value">
+                        <div class="ln_btn red" @click="checkGuess(i)">确认</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 猜猜 end(基础样式：2023/06/10 14:27:35)(显示猜猜：2023/06/11 08:02:44)(功能：2023/06/11 15:57:17) -->
+            <!-- LSY 💕 NZK strat(2023/06/10 09:20:24) -->
+            <div class="ln_box">
+                <h1 class="ln_title border_title t_center">LSY 💕 NZK</h1>
+                <div class="ln_content" style="padding-top: 18px;padding-bottom: 18px;">
+                    <div class="landk_top">
+                        <img src="/static/img/picture/k.png">
+                        <div class="love_box"><div class="love"></div></div>
+                        <img src="/static/img/picture/y.png">
+                    </div>
+                    <h2 st="2022,6,25,9:29:52" id="lovet" class="jishi"></h2>
+                    <h2 st="2022,10,06,13:44:02" id="lovef" class="jishi"></h2>
+                    <div class="flex_center" :style="`font-size: ${s.size}px;color: ${s.color};margin: 18px 0;`" v-for="s in landk">{{s.content}}<br><ii>({{s.time}})</ii></div>
+                </div>
+            </div>
+            <!-- LSY 💕 NZK end(爱心+图片：2023/06/10 09:58:06)(记时：2023/06/10 13:47:52)(end：2023/06/10 13:59:35) -->
+            <!-- 欠条 strat(2023/06/10 14:00:04) -->
+            <div class="ln_box">
+                <h1 class="ln_title border_title t_center">欠条</h1>
+                <div class="ln_content">
+                    <h2 st="2022,8,22,21:56:22" id="qt" class="jishi" style="margin-top: 0;"></h2>
+                </div>
+            </div>
+            <div class="ln_box" style="display: none;">
+                <h1 class="ln_title border_title t_center">欠条(于2022-10-07 10:10:00归还 9分30秒 id：4532)</h1>
+                <div class="ln_content">
+                    <h2 st="2022,8,22,21:56:22" id="qt1" class="jishi" style="margin-top: 0;"></h2>
+                </div>
+            </div>
+            <!-- 欠条 end(第一个：2023/06/10 14:03:34)(第二个：2023/06/10 14:05:46) -->
+            <!-- 少破 start(2023/06/11 16:20:44) -->
+            <div class="ln_box" v-show="goods.length>0" style="position: relative;">
+                <h1 class="ln_title border_title t_center">
+                    <span style="flex: 1;text-align: center;">2kの少破</span>
+                    <span style="max-width: 80px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    font-size: 14px;
+                    background-color: rgba(0,0,0,0.4);
+                    border-radius: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    text-indent: 0;
+                    padding: 0 8px;
+                    box-sizing: border-box;
+                    color: #fff;
+                    position: absolute;
+                    right: 12px;
+                    height: 30px;"><svg viewBox="0 0 1024 1024" width="20" height="20" style="margin-right: 4px;flex-shrink: 0;"><path d="M222.544 290.24c-11.248-22.488-16.44-46.712-16.44-72.664 0-92.564 75.26-167.824 167.824-167.824s167.824 75.26 167.824 167.824v4.324h-47.58v-4.324c0-66.608-53.636-120.248-120.244-120.248S253.684 150.964 253.684 217.576c0 18.168 4.328 35.464 12.112 51.904l1.728 3.46-42.388 20.76-2.592-3.46z" fill="#e4393c" p-id="8170"></path><path d="M670.82 964.296c-24.736 0-47.764-15.36-57.148-39.244-1.704-3.416-9.384-22.184-16.204-41.8 0-0.856 0-0.856-0.86-1.704-4.256 0-10.236 0.848-17.916 1.704-17.064 1.704-43.5 4.268-82.744 4.268-43.504 0-69.952-5.972-87.864-9.388-4.268-0.852-7.68-1.712-10.236-1.712 0 0.86-0.856 1.712-1.708 3.416-7.676 20.476-17.06 44.36-17.06 45.216-8.532 23.032-31.568 39.244-57.16 39.244-7.672 0-14.5-1.712-21.324-4.264l-69.952-26.444c-15.352-5.976-27.296-17.06-34.12-32.42-6.828-14.496-6.828-31.56-1.704-46.916 0-0.852 12.792-30.704 19.616-51.184 1.704-5.112 1.704-5.112-4.264-8.528l-1.704-0.852c-43.508-34.12-116.02-107.488-120.284-209-1.704-37.54 1.708-72.512 8.532-105.78-10.236-3.416-23.032-9.384-36.68-18.768C25.916 437.1 8 403.832 8 365.444c0-40.948 22.176-77.632 57.152-92.132 2.564-0.848 5.976-1.704 9.384-1.704 9.388 0 17.916 5.12 21.328 14.5 5.12 11.944 0 25.592-11.94 30.712-17.916 7.676-29.004 26.444-29.004 49.48 0 23.032 10.236 41.8 30.712 55.448 8.528 5.972 17.916 10.236 24.74 12.796 1.708-3.416 2.56-6.828 4.264-10.24 18.768-45.212 46.916-81.892 84.452-110.9C283.536 247.72 380.788 216.16 495.952 216.16c40.096 0 79.332 4.264 117.72 11.94 33.272-62.272 86.164-101.512 160.376-120.28 1.712-0.852 3.416-0.852 5.968-0.852 6.828 0 12.796 2.56 17.064 7.676 5.968 6.824 7.68 15.356 4.272 23.884-22.188 59.716-32.42 93.84-34.124 135.64 42.656 17.916 76.772 44.36 103.22 79.332 28.148 38.388 40.092 76.776 44.36 104.076 0.852 0 3.408 0.852 5.976 0.852h35.82c32.42 0 58.868 26.444 58.868 58.86v106.632c0 32.42-26.444 58.86-58.868 58.86h-35.82c-7.68 0-9.392 1.712-14.508 11.948-26.444 55.444-68.244 98.952-119.428 127.1-1.704 0.856-2.556 1.712-3.416 2.56 0 0.856 0.86 1.708 0.86 1.708l11.084 29.856c5.976 15.356 5.116 31.572-1.704 46.068-6.828 14.508-18.764 26.444-34.124 32.416l-69.944 26.444c-3.416 2.56-11.096 3.416-18.784 3.416z m-71.648-128.812c29 0 38.392 17.912 43.5 33.264 6.828 19.62 14.508 38.392 14.508 39.244v0.856c1.704 5.108 7.68 9.38 13.64 9.38 1.72 0 3.42 0 5.124-0.852l69.952-26.44a16.768 16.768 0 0 0 7.68-7.68 12.672 12.672 0 0 0 0-11.092l-11.092-29.004c-2.564-4.26-6.82-17.06-2.564-32.412 2.564-8.536 9.392-21.328 26.452-30.716 43.508-23.888 77.624-59.716 99.812-106.632 5.108-10.236 18.756-38.388 56.288-38.388h35.836c6.82 0 11.936-5.116 11.936-11.94V516.44c0-6.828-5.116-11.944-11.936-11.944h-35.836c-34.116 0-48.616-19.62-52.032-35.832-5.968-34.976-29.86-120.28-133.08-156.108-9.384-3.412-15.36-11.944-15.36-21.328-0.844-46.064 7.68-82.748 20.476-121.988-43.5 19.62-73.36 50.332-93.836 96.396-3.416 8.532-11.944 13.648-21.32 13.648-1.712 0-3.42 0-5.976-0.848-38.392-11.092-81.048-16.212-123.696-16.212-104.924 0-191.94 29.004-267.86 87.864-63.98 49.48-97.252 132.224-92.984 232.892 3.416 83.596 65.684 145.012 103.22 174.876l0.852 0.852c21.328 16.208 28.152 36.68 20.476 60.568-6.824 21.328-17.916 48.62-20.476 53.744-0.852 3.412-0.852 6.824 0.852 10.24a16.752 16.752 0 0 0 7.672 7.68l69.956 26.44c1.704 0.852 3.412 0.852 5.116 0.852 5.968 0 11.088-3.412 13.648-9.38 0-0.856 9.384-24.744 17.06-44.364 4.264-10.24 12.796-34.124 40.948-34.124 7.676 0 14.504 1.716 23.884 3.416 16.212 3.412 40.096 8.536 78.484 8.536 35.828 0 59.708-2.564 77.632-4.268 8.544-1.712 16.224-2.564 23.044-2.564z" fill="#e4393c" p-id="8171"></path><path d="M764.664 547.996a45.868 45.868 0 0 1-46.064-46.064c0-25.588 20.468-46.064 46.064-46.064s46.072 20.472 46.072 46.064c0 25.596-20.48 46.064-46.072 46.064z" fill="#e4393c" p-id="8172"></path></svg><span style="width: 100%;overflow: hidden;overflow-x: auto;">{{userInfo.point}}</span></span>
+                </h1>
+                <div class="ln_content flex_center" style="transition: .3s;flex-direction: row;flex-wrap: wrap;padding-bottom: 55px;" v-if="goods.length>0">
+                    <div class="shop_card" v-for="(good,i) in goods" :ref="`good_${i}`">
+                        <div class="good" @click="addGood(i)">
+                            <img class="shop_img" :src="good.img" :alt="good.name" @click="lookPic(good.img)">
+                            <p style="font-weight: bolder;text-indent: 12px;">{{ good.name }}</p>
+                            <div class="price">
+                                <svg viewBox="0 0 1024 1024" width="20" height="20" style="margin-right: 8px;"><path d="M222.544 290.24c-11.248-22.488-16.44-46.712-16.44-72.664 0-92.564 75.26-167.824 167.824-167.824s167.824 75.26 167.824 167.824v4.324h-47.58v-4.324c0-66.608-53.636-120.248-120.244-120.248S253.684 150.964 253.684 217.576c0 18.168 4.328 35.464 12.112 51.904l1.728 3.46-42.388 20.76-2.592-3.46z" fill="#e4393c" p-id="8170"></path><path d="M670.82 964.296c-24.736 0-47.764-15.36-57.148-39.244-1.704-3.416-9.384-22.184-16.204-41.8 0-0.856 0-0.856-0.86-1.704-4.256 0-10.236 0.848-17.916 1.704-17.064 1.704-43.5 4.268-82.744 4.268-43.504 0-69.952-5.972-87.864-9.388-4.268-0.852-7.68-1.712-10.236-1.712 0 0.86-0.856 1.712-1.708 3.416-7.676 20.476-17.06 44.36-17.06 45.216-8.532 23.032-31.568 39.244-57.16 39.244-7.672 0-14.5-1.712-21.324-4.264l-69.952-26.444c-15.352-5.976-27.296-17.06-34.12-32.42-6.828-14.496-6.828-31.56-1.704-46.916 0-0.852 12.792-30.704 19.616-51.184 1.704-5.112 1.704-5.112-4.264-8.528l-1.704-0.852c-43.508-34.12-116.02-107.488-120.284-209-1.704-37.54 1.708-72.512 8.532-105.78-10.236-3.416-23.032-9.384-36.68-18.768C25.916 437.1 8 403.832 8 365.444c0-40.948 22.176-77.632 57.152-92.132 2.564-0.848 5.976-1.704 9.384-1.704 9.388 0 17.916 5.12 21.328 14.5 5.12 11.944 0 25.592-11.94 30.712-17.916 7.676-29.004 26.444-29.004 49.48 0 23.032 10.236 41.8 30.712 55.448 8.528 5.972 17.916 10.236 24.74 12.796 1.708-3.416 2.56-6.828 4.264-10.24 18.768-45.212 46.916-81.892 84.452-110.9C283.536 247.72 380.788 216.16 495.952 216.16c40.096 0 79.332 4.264 117.72 11.94 33.272-62.272 86.164-101.512 160.376-120.28 1.712-0.852 3.416-0.852 5.968-0.852 6.828 0 12.796 2.56 17.064 7.676 5.968 6.824 7.68 15.356 4.272 23.884-22.188 59.716-32.42 93.84-34.124 135.64 42.656 17.916 76.772 44.36 103.22 79.332 28.148 38.388 40.092 76.776 44.36 104.076 0.852 0 3.408 0.852 5.976 0.852h35.82c32.42 0 58.868 26.444 58.868 58.86v106.632c0 32.42-26.444 58.86-58.868 58.86h-35.82c-7.68 0-9.392 1.712-14.508 11.948-26.444 55.444-68.244 98.952-119.428 127.1-1.704 0.856-2.556 1.712-3.416 2.56 0 0.856 0.86 1.708 0.86 1.708l11.084 29.856c5.976 15.356 5.116 31.572-1.704 46.068-6.828 14.508-18.764 26.444-34.124 32.416l-69.944 26.444c-3.416 2.56-11.096 3.416-18.784 3.416z m-71.648-128.812c29 0 38.392 17.912 43.5 33.264 6.828 19.62 14.508 38.392 14.508 39.244v0.856c1.704 5.108 7.68 9.38 13.64 9.38 1.72 0 3.42 0 5.124-0.852l69.952-26.44a16.768 16.768 0 0 0 7.68-7.68 12.672 12.672 0 0 0 0-11.092l-11.092-29.004c-2.564-4.26-6.82-17.06-2.564-32.412 2.564-8.536 9.392-21.328 26.452-30.716 43.508-23.888 77.624-59.716 99.812-106.632 5.108-10.236 18.756-38.388 56.288-38.388h35.836c6.82 0 11.936-5.116 11.936-11.94V516.44c0-6.828-5.116-11.944-11.936-11.944h-35.836c-34.116 0-48.616-19.62-52.032-35.832-5.968-34.976-29.86-120.28-133.08-156.108-9.384-3.412-15.36-11.944-15.36-21.328-0.844-46.064 7.68-82.748 20.476-121.988-43.5 19.62-73.36 50.332-93.836 96.396-3.416 8.532-11.944 13.648-21.32 13.648-1.712 0-3.42 0-5.976-0.848-38.392-11.092-81.048-16.212-123.696-16.212-104.924 0-191.94 29.004-267.86 87.864-63.98 49.48-97.252 132.224-92.984 232.892 3.416 83.596 65.684 145.012 103.22 174.876l0.852 0.852c21.328 16.208 28.152 36.68 20.476 60.568-6.824 21.328-17.916 48.62-20.476 53.744-0.852 3.412-0.852 6.824 0.852 10.24a16.752 16.752 0 0 0 7.672 7.68l69.956 26.44c1.704 0.852 3.412 0.852 5.116 0.852 5.968 0 11.088-3.412 13.648-9.38 0-0.856 9.384-24.744 17.06-44.364 4.264-10.24 12.796-34.124 40.948-34.124 7.676 0 14.504 1.716 23.884 3.416 16.212 3.412 40.096 8.536 78.484 8.536 35.828 0 59.708-2.564 77.632-4.268 8.544-1.712 16.224-2.564 23.044-2.564z" fill="#e4393c" p-id="8171"></path><path d="M764.664 547.996a45.868 45.868 0 0 1-46.064-46.064c0-25.588 20.468-46.064 46.064-46.064s46.072 20.472 46.072 46.064c0 25.596-20.48 46.064-46.072 46.064z" fill="#e4393c" p-id="8172"></path></svg>
+                                <span style="width: 100%;white-space: nowrap;overflow: hidden;overflow-x: auto;">{{ good.price }}</span>
+                            </div>
+                            <div class="explanation">
+                                {{ good.explanation }}
+                            </div>
+                        </div>
+                        <div class="mask" v-show="good.isShow">
+                            <svg style="position: absolute;top: 50%;left: 50%;z-index: 9;transform: translate(-50%,-70%);" viewBox="0 0 1024 1024" width="50" height="50"><path fill="#ffffff" d="M511.548421 7.22526C233.375904 7.22526 7.044629 233.556536 7.044629 511.729053s226.331275 504.503793 504.503792 504.503792 504.503793-226.331275 504.503793-504.503792S789.720938 7.22526 511.548421 7.22526z m0 943.438349c-242.046216 0-438.934556-196.88834-438.934556-438.934556s196.88834-438.934556 438.934556-438.934557 438.934556 196.88834 438.934557 438.934557-196.88834 438.934556-438.934557 438.934556z" p-id="2349"></path><path d="M785.205151 325.678603c-12.824837-12.824837-33.59746-12.824837-46.422297 0L436.405715 628.236373l-152.091727-152.091727c-12.824837-12.824837-33.59746-12.824837-46.422296 0-12.824837 12.824837-12.824837 33.59746 0 46.422297l175.212559 175.21256c1.625684 1.625684 3.251367 3.070736 5.238314 4.154524 5.418945 3.61263 11.741048 5.418945 18.06315 5.418945 8.489681 0 16.79873-3.251367 23.301464-9.573469 0 0 0.180632-0.180632 0.180632-0.361263L785.205151 372.1009c12.824837-12.824837 12.824837-33.59746 0-46.422297z" fill="#1e6eff" p-id="2350"></path></svg>
+                            <el-input-number size="mini" v-model="good.value" :style="`pointer-events: ${good.isShow===true?'all':'none'};width: 100px;position: absolute;top: 65%;left: 50%;transform: translate(-50%,-50%);z-index: 9;`"></el-input-number>
+                            <div class="mask_box" @click="addGood(i)"></div>
+                        </div>
+                    </div>
+                </div>
+                <div :style="`z-index: 9;width: 100%;height: 50px;opacity: ${shop.isSelected==true?1:0};position: absolute;bottom: ${shop.isSelected==true?0:-60}px;transition: .3s;`">
+                    <div class="ln_btn radius" v-html="`结算${shop.allPrice>0?shop.afford===true?`(${shop.allPrice})`:`&lt;e&gt;(${shop.allPrice})&lt;/e&gt;`:''}`" @click="jiesuan()"></div>
+                </div>
+            </div>
+            <!-- 少破 end(基础样式：2023/06/1 18:59:53)(功能：2023/06/12 18:42:14) -->
+            <!-- 小纸条 start(2023/06/10 14:06:29) -->
+            <div class="ln_box">
+                <h1 class="ln_title border_title t_center">小纸条</h1>
+                <div class="ln_content">
+                    <div class="ln_form radius">
+                        <input class="ln_input center" placeholder="填一串神秘滴数字~" type="number" v-model="paper.value">
+                        <div class="ln_btn" @click="lookPaper()">查看</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 小纸条 end(基础样式+圆角：2023/06/10 14:21:11)(功能：2023/06/10 22:26:52) -->
+            <!-- 留言 start(2023/06/10 20:34:38) -->
+            <div class="ln_box">
+                <h1 class="ln_title border_title t_center">想对我说的话<span style="font-size: 18px;" v-show="liuyan.num>0">(已留言<e>{{ liuyan.num }}</e>条)</span></h1>
+                <div class="ln_content">
+                    <div class="ln_form radius">
+                        <textarea class="ln_input" placeholder="说句话嘛~" v-model="liuyan.value"></textarea>
+                        <div class="ln_btn red" @click="liu()">发送(别忘了点我！)</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 留言 end(基础样式：2023/06/10 20:42:26)(功能：2023/06/10 22:06:16) -->
+            <!-- 对她说 start(2023/06/10 16:18:20) -->
+            <div class="ln_box">
+                <h1 class="ln_title border_title">我想对你说的话</h1>
+                <div class="ln_content">
+                    <ul style="overflow:auto;text-align: center;">
+                        <li v-for="say in sayth" v-html="say.content"></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 对她说 end(基础样式：2023/06/10 16:41:41)(功能：2023/06/10 21:42:33) -->
+            <!-- What is Lsy start(2023/06/10 16:42:50)(lsy想跟我分手) -->
+            <div class="ln_box">
+                <h1 class="ln_title border_title">What is Lsy</h1>
+                <div class="ln_content">
+                    <ul style="overflow:auto;">
+                        <li v-for="say in says" v-html="say.content"></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- What is Lsy end(基础样式：2023/06/10 16:41:41)(数据处理：2023/06/10 20:26:55)(功能：2023/06/10 21:36:20) -->
+            <!-- 一言 start(2023/06/10 20:29:00) -->
+            <div class="ln_box" style="cursor: pointer;font-size: 22px;font-weight: bold;" @click="yiyan()">
+                <div style="padding: 12px;word-wrap: break-word;word-break: break-all;">{{ yan.content }}</div>
+            </div>
+            <!-- 一言 end(基础样式：2023/06/10 20:30:44)(功能：2023/06/10 20:33:33) -->
+            <el-backtop target=".ln_index" :bottom="120" :right="18"></el-backtop>
+        </div>
+        <!-- 我的 -->
+        <div class="ln_my" v-show="pageInfo.nav==='me'" style="z-index: 12;">
+            <div class="ln_my_top">
+                <img src="/static/img/user_bg.jpg">
+                <div class="ln_my_top_head">
+                    <img :src="userInfo.headsolt" width="80px" height="80px" @click="lookPic(userInfo.headsolt)">
+                    <svg v-show="userInfo.sex=='男'" t="1672190031903" class="icon" viewBox="0 0 1024 1024" p-id="2746" width="24" height="24"><path d="M872.335 421.516V151.71H602.528L702.949 252.13 601.4 353.68c-46.47-32.81-103.174-52.091-164.385-52.091-157.595 0-285.351 127.756-285.351 285.35S279.421 872.29 437.014 872.29s285.352-127.755 285.352-285.35c0-57.78-17.19-111.537-46.711-156.47l102.818-102.814 93.862 93.861zM437.015 782.18c-107.827 0-195.24-87.413-195.24-195.24s87.413-195.24 195.24-195.24 195.24 87.413 195.24 195.24-87.413 195.24-195.24 195.24z" fill="#1296DB" p-id="2747"></path></svg>
+                    <svg v-show="userInfo.sex=='女'" t="1672200632134" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2468" width="24" height="24">
+                        <path
+                            d="M686.9 360.7c0 9.8-0.7 19.6-2 29.3 0.5-3.5 0.9-7 1.4-10.5-2.6 18.5-7.5 36.5-14.6 53.7 1.3-3.2 2.7-6.3 4-9.5-7.2 17.1-16.6 33.2-28 48 2.1-2.7 4.1-5.3 6.2-8a218.15 218.15 0 0 1-39 39c2.7-2.1 5.3-4.1 8-6.2-14.8 11.3-30.8 20.7-48 28 3.2-1.3 6.3-2.7 9.5-4-17.2 7.2-35.2 12.1-53.7 14.6 3.5-0.5 7-0.9 10.5-1.4a221.1 221.1 0 0 1-58.6 0c3.5 0.5 7 0.9 10.5 1.4-18.5-2.6-36.5-7.5-53.7-14.6 3.2 1.3 6.3 2.7 9.5 4-17.1-7.2-33.2-16.6-48-28 2.7 2.1 5.3 4.1 8 6.2a218.15 218.15 0 0 1-39-39c2.1 2.7 4.1 5.3 6.2 8-11.3-14.8-20.7-30.8-28-48 1.3 3.2 2.7 6.3 4 9.5-7.2-17.2-12.1-35.2-14.6-53.7 0.5 3.5 0.9 7 1.4 10.5a221.1 221.1 0 0 1 0-58.6c-0.5 3.5-0.9 7-1.4 10.5 2.6-18.5 7.5-36.5 14.6-53.7-1.3 3.2-2.7 6.3-4 9.5 7.2-17.1 16.6-33.2 28-48-2.1 2.7-4.1 5.3-6.2 8 11.3-14.6 24.4-27.7 39-39-2.7 2.1-5.3 4.1-8 6.2 14.8-11.3 30.8-20.7 48-28-3.2 1.3-6.3 2.7-9.5 4 17.2-7.2 35.2-12.1 53.7-14.6-3.5 0.5-7 0.9-10.5 1.4 19.5-2.6 39.2-2.6 58.6 0-3.5-0.5-7-0.9-10.5-1.4 18.5 2.6 36.5 7.5 53.7 14.6-3.2-1.3-6.3-2.7-9.5-4 17.1 7.2 33.2 16.6 48 28-2.7-2.1-5.3-4.1-8-6.2 14.6 11.3 27.7 24.4 39 39-2.1-2.7-4.1-5.3-6.2-8 11.3 14.8 20.7 30.8 28 48-1.3-3.2-2.7-6.3-4-9.5 7.2 17.2 12.1 35.2 14.6 53.7-0.5-3.5-0.9-7-1.4-10.5 1.3 9.7 2 19.5 2 29.3 0 10.2 4.4 20.8 11.6 28 6.9 6.9 18.2 12.1 28 11.6 10.3-0.5 20.9-3.8 28-11.6 7.1-7.7 11.6-17.3 11.6-28-0.1-50.9-15.5-102.8-45.2-144.5-8.1-11.3-16.8-22.4-26.4-32.4-9.7-10.1-20.5-18.8-31.6-27.3-20.1-15.4-42.5-26.7-66.2-35.4-24.2-8.9-50.4-13.4-76.1-14.4-26-1-52.8 2.3-77.8 9.3-47.9 13.5-92.9 41.8-124.6 80.3-8.9 10.8-17.3 22-24.5 33.9-7.3 12.1-13 24.9-18.4 38-9.9 24-14.9 49.4-16.9 75.2-2.1 26.1 0.6 52.9 6.7 78.3 5.9 24.4 15.9 48.4 28.9 69.9 25.6 42.4 64.3 78.4 109.6 98.9 12.9 5.8 26.1 11.2 39.8 15 14 3.9 28.4 6.1 42.8 7.8 26.2 3.1 52.8 1.1 78.6-4.1 49-9.8 95.6-36.1 130.1-72.1 34.7-36.2 59.6-83.3 67.3-133 2.2-14.4 3.9-28.8 3.9-43.4 0-10.1-4.4-20.9-11.6-28-6.9-6.9-18.2-12.1-28-11.6-21.5 0.9-39.5 17.4-39.6 39.6z m-47.1 425.1H384.2c-20.3 0-37-16.6-37-37v-5.4c0-20.3 16.6-37 37-37h255.6c20.3 0 37 16.6 37 37v5.4c0 20.4-16.7 37-37 37z"
+                            p-id="2469" fill="#ec87c0"></path>
+                        <path
+                            d="M517.3 917.5H512c-20.3 0-37-16.6-37-37V612.6c0-20.3 16.6-37 37-37h5.4c20.3 0 37 16.6 37 37v267.9c-0.1 20.4-16.7 37-37.1 37z"
+                            p-id="2470" fill="#ec87c0"></path>
+                    </svg>
+                    <svg v-show="userInfo.sex!='男'&&userInfo.sex!='女'" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 200 200"
+                        class="icon">
+                        <image x="47" y="134" width="81" height="56"
+                            xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAHCAYAAAAxrNxjAAAAb0lEQVQYlW2PsQmAQBAEZ0WwBEMzCzAwtQt7MLQKe7EKje3C3FTMTp4XPOU3uWNuOFgd04LxyQjUwgZDkRvkwAxUzmzjTY1jexD/OYHLQ4kriP3PXJ/ZeZj6WCRYFH0ZQZlg5DLIHDCxhT2zVxZwAwyuFYp+FE2OAAAAAElFTkSuQmCC" />
+                        <image x="37" y="11" width="128" height="130"
+                            xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAQCAYAAADJViUEAAABo0lEQVQokX3Tz4uNURzH8dfzmF/dO01ykUgpqZlmRbJRVkbYSaKkaFgp2ViPbOdPMOMvwGxEw4ZYKBbEZmYhilDXWEzizjz3OTrXuXVnrrmfen6d83n3fb4/TnZhpm5pU7/xxrKp7wtCRiUvLA4Mm6qNCQwNhvI1NqOOL/iNd32SCrlKWdBcpT9TDU1bmiu+9g2FwVAuYC8+4FRCTrciN7NMhrE/y44s1/0YHDA3slNDbiCUOrQPi+nzYytyfyhbkZ9Va7Xn1dolwUQlNPORcnU+yGYDPzGO95jHE9zKI1zK5MLkjqJR31qsTG9rNvYPl8VoKZsOLOEm3uITjqe8K3n6hcuYwZtcGM3Yjt3puoOpVgz2JP/heOtLhtt4hJPW6jMm8QtXk7/AXHTFgj3GRHzXW6u4h3NtV57Ahz2xf5rF2c6Fds4vuqzderl+pQ3v6rJ2KxaxC/7WmUcPXUQc0zXwFdRS7hvpYBxA3FgPP8BdxKqf+A99AK9Se552brQPxpkEx6rHEYzP2M+jOIT78SBsVLCoYzif+n0N19N+rEcXCH8BtSJ56sGejxMAAAAASUVORK5CYII=" />
+                    </svg>
+                </div>
+                <h2>{{ userInfo.nickname }}</h1>
+                    <h4>{{ userInfo.description }}</h4>
+                    <div
+                        style="position:absolute;display:flex;align-items: center;justify-content: space-evenly;text-align: center;top: 200px;width:80%;">
+                        <div style="display: flex;flex-direction: column;">
+                            <span style="color: rgba(0,0,0,.45);font-size: 14px;">积分</span>
+                            <h2>{{ userInfo.point }}</h2>
+                        </div>
+                        <div style="display: flex;flex-direction: column;">
+                            <span style="color: rgba(0,0,0,.45);font-size: 16px;">访问</span>
+                            <h1 style="margin: 0;">{{ userInfo.see }}</h1>
+                        </div>
+                        <div style="display: flex;flex-direction: column;">
+                            <span style="color: rgba(0,0,0,.45);font-size: 14px;">等级</span>
+                            <h2>{{ userInfo.level }}</h2>
+                        </div>
+                    </div>
+            </div>
+            <div class="ln_my_body">
+                <div @click="item.show=true;" v-for="(item,i) in my_page" class="ln_my_body_items bold_20">
+                    {{item.name}}
+                </div>
+                <el-dialog title="个人信息" :modal-append-to-body="false" :visible.sync="my_page[0].show">
+                    <el-form :model="userInfo_page">
+                        <el-form-item label="头像" :label-width="pageInfo.formLabelWidth">
+                            <el-upload class="avatar-uploader" action="/upload/user" :show-file-list="false"
+                                :on-success="handleAvatarSuccess">
+                                <img v-if="userInfo_page.headsolt" :src="userInfo_page.headsolt" class="avatar">
+                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                            </el-upload>
+                        </el-form-item>
+                        <el-form-item label="昵称" :label-width="pageInfo.formLabelWidth">
+                            <el-input v-model="userInfo_page.nickname" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="简介" :label-width="pageInfo.formLabelWidth">
+                            <el-input type="textarea" v-model="userInfo_page.description" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="性别" :label-width="pageInfo.formLabelWidth">
+                            <el-radio-group v-model="userInfo_page.sex">
+                                <el-radio-button label="男"></el-radio-button>
+                                <el-radio-button label="女"></el-radio-button>
+                            </el-radio-group>
+                        </el-form-item>
+                        <el-form-item label="出生日期" :label-width="pageInfo.formLabelWidth">
+                            <el-date-picker v-model="userInfo_page.birth" type="date" @change="selectTime"
+                                placeholder="选择你的生日(阳历)">
+                            </el-date-picker>
+                        </el-form-item>
+                        <el-form-item label="生日" :label-width="pageInfo.formLabelWidth">
+                            <el-date-picker v-model="userInfo_page.birthday" type="date" @change="getBirth" format="MM-dd"
+                                placeholder="选择日期">
+                            </el-date-picker>
+                        </el-form-item>
+                        <el-form-item label="星座" :label-width="pageInfo.formLabelWidth">
+                            <el-input v-model="userInfo_page.horo" autocomplete="off" disabled></el-input>
+                        </el-form-item>
+                        <el-form-item style="display: flex;justify-content: center;">
+                            <el-button @click="my_page[0].show=false">取 消</el-button>
+                            <el-button type="primary" @click="submitInfoChange()">修 改</el-button>
+                        </el-form-item>
+                    </el-form>
+                </el-dialog>
+                <el-dialog title="修改密码/用户名" :modal-append-to-body="false" :visible.sync="my_page[1].show">
+                    <el-form :model="password_page" status-icon :label-width="pageInfo.formLabelWidth" :hide-required-asterisk="true">
+                        <el-form-item label="密码" prop="oldp">
+                            <el-input type="password" v-model="password_page.oldp" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="新密码" prop="newp">
+                            <el-input type="password" v-model="password_page.newp" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="确认密码" prop="news">
+                            <el-input type="password" v-model="password_page.news" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button @click="my_page[1].show=false;">取消</el-button>
+                            <el-button type="primary" @click="changePass()">提交</el-button>
+                        </el-form-item>
+                    </el-form>
+                    <el-form :model="usrname_page" status-icon :label-width="pageInfo.formLabelWidth" :hide-required-asterisk="true">
+                        <el-form-item label="用户名" prop="usrname">
+                            <el-input type="usrname" v-model="usrname_page.usr" autocomplete="off" placeholder="新的用户名"></el-input>
+                        </el-form-item>
+                        <el-form-item label="密码" prop="pwd">
+                            <el-input type="password" v-model="usrname_page.pwd" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button @click="my_page[1].show=false;">取消</el-button>
+                            <el-button type="primary" @click="changeUsrname()">修改</el-button>
+                        </el-form-item>
+                    </el-form>
+                </el-dialog>
+                <el-dialog title="系统设置" :modal-append-to-body="false" :visible.sync="my_page[3].show">
+                    <el-button @click="logout()">退出登录</el-button>
+                </el-dialog>
+                <!-- 背包 start(2023/06/12 18:48:59) -->
+                <el-dialog title="背包" :modal-append-to-body="false" :visible.sync="my_page[2].show">
+                    <div class="grid">
+                        <div :class="`shop_item ${bag.selectId===good.id?'active':''}`" v-for="good in bag.data" @click="showGood(good.id)" @click.stop>
+                            <img :src="good.img">
+                        </div>
+                    </div>
+                    <footer style="display: flex;height: 200px;background-color: rgba(255,97,97,0.89);position: fixed;left: 0;bottom: 65px;width: 100%;" v-if="bag.info" @click.stop>
+                        <div class="left" style="max-width: 32%;display: flex;flex-direction: column;justify-content: center;align-items: center;font-size: 16px;">
+                            <img :src="bag.info.img" style="width: 100%;" @click="lookPic(bag.info.img)">
+                            <div style="font-weight: bold;color: #000;">{{bag.info.name}}</div>
+                            <div style="font-weight: bold;color: #000;">拥有<span style="color: rgb(255, 199, 0);font-weight: bolder;">{{bag.info.value}}</span>个</div>
+                        </div>
+                        <div class="right" style="flex: 1;display: flex;flex-direction: column;justify-content: space-evenly;align-items: flex-start;font-size: 18px;padding: 20px 10px 20px 40px;">
+                            <div>{{bag.info.explanation}}</div>
+                            <div class="func" style="display: flex;align-items: center;">
+                                <div style="padding: 12px 0;" class="ln_btn radius white" @click="useGood(bag.selectId)">使用</div>
+                                <div style="padding: 12px 0;margin-left: 12px;" class="ln_btn radius second" style="color: #000;background-color: var(--secocol);" @click="sellGood(bag.selectId)">出售</div>
+                            </div>
+                        </div>
+                    </footer>
+                </el-dialog>
+                <!-- 背包 end(2023/06/18 19:34:30) -->
+            </div>
+        </div>
+        <!-- 导航栏 -->
+        <nav class="ln_nav" id="ln_nav" style="z-index: 15;">
+            <div :class="`nav-item ${pageInfo.nav==='picture'?'is-active':''}`" @click="jump('./picture',true)">
+                <svg t="1672129584805" class="icon" viewBox="0 0 1297 1024" p-id="2987" width="30" height="30"><path d="M1287.926378 191.342357a45.040094 45.040094 0 0 0-29.464269-17.685051l-119.301084-17.360555-21.757481-119.25241A45.040094 45.040094 0 0 0 1065.240755 0.70075l-436.934339 81.286336L288.44516 32.501392a44.780497 44.780497 0 0 0-50.75123 38.29057l-12.282186 85.991534-188.69463 35.045606a44.553349 44.553349 0 0 0-28.831501 18.820788 45.753986 45.753986 0 0 0-7.13892 33.909869l135.412329 742.285409a45.299691 45.299691 0 0 0 18.642315 29.042423 43.904357 43.904357 0 0 0 25.440514 8.112409 45.543063 45.543063 0 0 0 8.112409-0.811241l601.08082-111.788994 356.118523 51.919417a44.08283 44.08283 0 0 0 6.489927 0.486744 44.92652 44.92652 0 0 0 44.293752-38.777314l13.109653-91.507971 7.463416-1.460234a45.234792 45.234792 0 0 0 35.970421-52.730657l-20.03765-109.679768 63.601285-444.722252a45.591738 45.591738 0 0 0-8.518029-33.585373z m-105.866935 200.052002l-40.0753 280.040353-12.071264 84.855797-13.515273 94.428438-2.401273 16.711563-48.804252-7.13892-277.444382-40.399796-554.888764-80.799592 72.200438-505.078574 13.499049-94.590687 1.622481-11.032876 32.546985 4.705197 277.444382 40.399796 432.650988 63.114541 93.633422 13.628847 44.95897 6.489927zM1037.398968 97.887408l8.112409 44.780496-139.776804-20.281022zM96.992312 272.628694l114.920383-21.416759-52.195238 365.220645z m119.203735 653.373407l-18.334044-100.593869 314.063796 45.753986z m298.131025-497.128413a82.032678 82.032678 0 1 0-68.906801-92.968205 81.497259 81.497259 0 0 0 68.906801 92.968205z m495.359908 77.067884l-81.708182 85.504789-102.978918-204.919447L629.26368 613.512113s-233.134405-132.719008-303.90706 48.512205l716.260801 109.193023z" fill="#b1b1b1" p-id="2988"></path></svg>
+                <span>照片墙</span>
+            </div>
+            <div :class="`nav-item ${pageInfo.nav==='home'?'is-active':''}`" name="首页" @click="jump('home',false)">
+                <svg t="1672130516149" class="icon" viewBox="0 0 1024 1024" p-id="1404" width="30" height="30"><path d="M130.637 552.628c-8.188 0-16.376-3.123-22.624-9.369-12.499-12.495-12.501-32.756-0.007-45.255l382.521-382.628c12.496-12.498 32.758-12.501 45.255-0.006 12.499 12.495 12.502 32.756 0.007 45.254L153.268 543.252c-6.248 6.25-14.44 9.376-22.631 9.376z" fill="#b1b1b1" p-id="1405"></path><path d="M896.174 552.628c-8.191 0-16.382-3.125-22.631-9.376L491.022 160.624c-12.495-12.499-12.492-32.76 0.007-45.254s32.76-12.492 45.255 0.006l382.521 382.628c12.495 12.499 12.492 32.76-0.007 45.255-6.247 6.246-14.437 9.369-22.624 9.369zM870.174 192H678.137c-17.673 0-32-14.327-32-32s14.327-32 32-32h192.037c17.673 0 32 14.327 32 32s-14.327 32-32 32z" fill="#b1b1b1" p-id="1406"></path><path d="M869.155 385.019c-17.673 0-32-14.327-32-32V160.981c0-17.673 14.327-32 32-32s32 14.327 32 32v192.037c0 17.674-14.327 32.001-32 32.001zM842.408 930.671l-275.632-1.592 1.546-227.582-104.362 1.712 3.114 226.844-282.477-3.581-6.806-349.74c-0.344-17.669 13.702-32.272 31.372-32.616 17.666-0.336 32.273 13.701 32.616 31.372l5.6 287.775 154.799 1.962-3.088-224.961 233.675-3.831-1.555 229.017 147.171 0.85-0.121-290.24c-0.008-17.674 14.313-32.006 31.986-32.014h0.014c17.668 0 31.992 14.318 32 31.986l0.148 354.639z" fill="#b1b1b1" p-id="1407"></path></svg>
+                <span>首页</span>
+            </div>
+            <div :class="`nav-item ${pageInfo.nav==='me'?'is-active':''}`" @click="jump('me',false)">
+                <svg t="1672130620408" class="icon" viewBox="0 0 1024 1024" p-id="2374" width="30" height="30"><path d="M899.640668 897.714805c-7.238868-108.132766-60.680011-208.738092-146.610102-276.03173l-5.16565-3.568269-0.047072 0.069585c-4.88731-2.988054-10.458189-4.586458-16.192797-4.586458-19.701714 0-31.458479 9.498328-31.458479 25.411763 0 9.266038 4.285606 17.975397 11.477402 23.882943l-0.080841 0.13917 4.562922 3.266393c72.065316 51.518351 112.638383 129.652895 120.584356 232.273111l0.084934 1.119497c-0.071631 0.862647-0.116657 1.731434-0.116657 2.612501 0 17.340947 14.058181 31.400151 31.400151 31.400151 16.759709 0 30.449499-13.131065 31.350009-29.665647l0.624217 0L899.640668 897.714805zM798.515502 371.795794c0-156.107407-128.529305-283.119149-286.524712-283.119149s-286.525736 127.011742-286.525736 283.119149c0 84.110653 37.19104 162.570609 102.377692 216.660528-117.01711 62.452377-194.688097 181.588755-203.479321 313.118394l-0.36225 5.482875c-0.007163 0.113587-0.016373 0.226151-0.022513 0.340761l-0.032746 0.499373 0.019443 0c-0.008186 0.267083-0.019443 0.533143-0.019443 0.802272 0 14.702863 11.918447 26.622334 26.622334 26.622334 14.702863 0 26.622334-11.918447 26.622334-26.622334 0-0.26913-0.01228-0.535189-0.019443-0.802272l0.553609 0 0.417509-5.467525c9.647731-124.997875 88.871073-234.450706 202.112184-279.552927 33.809013 15.705704 85.420485 32.060183 131.714857 32.060183 42.889833 0 84.540442-9.451256 124.198673-28.307719l29.048593-16.863063 23.720238-15.566534C758.567675 539.996634 798.515502 458.919061 798.515502 371.795794zM511.989767 597.931115c-126.247332 0-228.949412-101.461833-228.949412-226.157833 0-124.673487 102.701057-226.111784 228.949412-226.111784 126.259612 0 228.972948 101.438297 228.972948 226.111784C740.961692 496.469282 638.249379 597.931115 511.989767 597.931115z" fill="#b1b1b1" p-id="2375"></path></svg>
+                <span>我的</span>
+            </div>
+        </nav>
+    </div>
+</body>
+    <script src="/static/js/vue.js"></script>
+    <script src="/static/js/elementUI.js"></script>
+    <script src="/static/js/axios.js"></script>
+    <script src="/static/index/js/snow.js"></script>
+    <script src="/static/index/js/rain.js"></script>
+    <script src="/static/js/utils.js"></script>
+    <script>
+        let ln=new Vue({
+            el: '#ln',
+            data(){
+                return{
+                    bag: {
+                        selectId: -1,
+                        data: {},
+                        select: 1
+                    },
+                    shop: {
+                        allPrice: 0,
+                        isSelected: false,
+                        afford: true
+                    },
+                    goods: [],
+                    guesses: [],
+                    ques: [],
+                    paper: {value: ''},
+                    says: [],
+                    liuyan: {num: 0,value: ''},
+                    yan: {content: '刘思雨 我爱你~'},
+                    sayth: [],
+                    landk: [{
+                        content: '愿我们的感情天长地久，永不消散!',
+                        color: 'red',
+                        size: 18,
+                        time: '2022/07/06 18:43:24'
+                    },{
+                        content: '世间安得双全法 不负如来不负卿',
+                        color: 'red',
+                        size: 18,
+                        time: '2022/08/22 11:36:58'
+                    },{
+                        content: '“娶你回家 ，说到做到”',
+                        color: 'red',
+                        size: 18,
+                        time: '2022/09/10 13:55:00'
+                    },{
+                        content: '对不起',
+                        color: 'red',
+                        size: 18,
+                        time: '2022/12/02 16:27:14'
+                    }],
+                    calendar: {
+                        year_month: '',
+                        days: [],
+                        str: ''
+                    },
+                    searchInfo:{
+                        key: '',
+                        data: [],
+                        rn: 5,
+                        pn: 1
+                    },
+                    pageInfo: {
+                        isLoading: true,
+                        nav: 'home',
+                        formLabelWidth: '80px',
+                    },
+                    userInfo: {},
+                    userInfo_page: {},
+                    my_page: [{
+                        name: '📑修改资料',
+                        as: 'myInfo',
+                        show: false
+                    },{
+                        name: '🔐修改密码',
+                        as: 'password',
+                        show: false
+                    },{
+                        name: '💼背包',
+                        as: 'bag',
+                        show: false
+                    },{
+                        name: '🛠设置',
+                        as: 'settings',
+                        show: false
+                    }],
+                    password_page:{
+                        oldp: '',
+                        newp: '',
+                        news: ''
+                    },
+                    usrname_page:{
+                        usr: '',
+                        pwd: ''
+                    }
+                }
+            },
+            mounted(){
+                //获取设置
+                this.$nextTick(()=>{
+                    axios({
+                        method: 'POST',
+                        url: './settings',
+                        data: {type: 'get'}
+                    }).then((rs)=>{
+                        for(let i in rs.data){this.pageInfo[i]=rs.data[i];}
+                        this.$forceUpdate();
+                        // css
+                        if(emptyStr(rs.data.css)==false){
+                            let css=document.createElement('style');
+                            css.innerText=rs.data.css;
+                            document.head.appendChild(css);
+                        }
+                        // html
+                        if(emptyStr(rs.data.html)==false){
+                            let html=document.createElement('div');
+                            html.innerHTML=rs.data.html;
+                            document.body.appendChild(html);
+                        }
+                        // js
+                        if(emptyStr(rs.data.js)===false){
+                            let js=document.createElement('script');
+                            js.text=rs.data.js;
+                            document.body.appendChild(js);
+                        }
+                        let css=document.createElement('style');
+                        if(emptyStr(rs.data.maincol)==false){
+                            var root=document.querySelector(":root");
+                            root.style.setProperty("--maincol",rs.data.maincol);
+                        }
+                        if(emptyStr(rs.data.secocol)==false){
+                            var root=document.querySelector(":root");
+                            root.style.setProperty("--secocol",rs.data.secocol);
+                        }
+                        if(emptyStr(rs.data.title)==false){
+                            if(emptyStr(rs.data.subTitle)==false){
+                                document.title=rs.data.title+rs.data.subTitle;
+                            }else{
+                                document.title=rs.data.title
+                            }
+                        }
+                    });
+                });
+                //获取用户信息
+                this.getUserInfo();
+                axios({
+                    method: 'POST',
+                    url: '/personal',
+                    data: {type: 'addSee'}
+                });
+                this.showday();
+                setInterval(()=>{
+                    ltime('lovef','和<e>刘思雨</e>假装分手的第</br>',null,null);
+                    ltime('lovet','和<e>刘思雨</e>在一起的第</br>',null,null);
+                    ltime('qt',null,'一边亲一边抱我我不撒口也不撒手',660);
+                    ltime('qt1',null,'任我处置',300);
+                },1000);
+                this.yiyan();
+                this.getSays();
+                this.getSaysth();
+                this.getAllLiuyan();
+                this.getQue();
+                this.getGuess();
+                this.pageInfo.isLoading=false;
+            },
+            watch:{
+                my_page:{
+                    deep: true,
+                    handler(v){
+                        if(v[0].show===true){this.userInfo_page=JSON.parse(JSON.stringify(this.userInfo));}
+                        if(v[1].show===true){this.password_page={oldp: '',newp: '',news: ''}}
+                    }
+                }
+            },
+            methods:{
+                jump(to,really=false){
+                    if(really===true){
+                        this.$confirm('确定要访问?','提示',{
+                            confirmButtonText: '确定',
+                            cancelButtonText: '取消',
+                            type: 'warning'
+                        }).then(()=>{
+                            this.pageInfo.nav='picture';
+                            this.$notify({
+                                title: '登录',
+                                message: `正在火速带您进入~`,
+                                type: 'success'
+                            });
+                            setTimeout(() => {
+                                location.href=to;
+                            }, 500);
+                            return;
+                        });
+                    }else{
+                        this.pageInfo.nav=to;
+                    }
+                },
+                selectTime(val) {
+                    var yyyy = val.getFullYear();
+                    var MM = val.getMonth() + 1;
+                    MM = MM > 9 ? MM : '0' + MM;
+                    var dd = val.getDate();
+                    dd = dd > 9 ? dd : '0' + dd;
+                    const newDate = yyyy + '-' + MM + '-' + dd;
+                    this.userInfo_page.birth = newDate;
+                    var year = new Date().getFullYear() - yyyy;
+                    this.userInfo_page.age = year;
+                    if (MM == '' || dd == '') { this.userInfo_page.horo = ''; return; }
+                    var s = "魔羯水瓶双鱼白羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯";
+                    var arr = [20, 19, 21, 21, 21, 22, 23, 23, 23, 23, 22, 22];
+                    this.userInfo_page.horo = s.substr(MM * 2 - (dd < arr[MM - 1] ? 2 : 0), 2) + '座';
+                },
+                getBirth(val) {
+                    var MM = val.getMonth() + 1;
+                    MM = MM > 9 ? MM : '0' + MM;
+                    var dd = val.getDate();
+                    dd = dd > 9 ? dd : '0' + dd;
+                    const newDate = MM + '-' + dd;
+                    this.userInfo_page.birthday = newDate;
+                },
+                handleAvatarSuccess(res,file){
+                    if(!(res.status===200)){
+                        return this.$notify.error({
+                            title: '上传',
+                            message: `上传失败[-code: ${res.status}]`
+                        });
+                    }
+                    this.userInfo.headsolt=res.path;
+                    this.userInfo_page.headsolt=res.path;
+                },
+                submitInfoChange(){
+                    this.$confirm('确定要修改您的个人信息嘛?','提示',{
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(()=>{
+                        if(this.userInfo.id!== this.userInfo_page.id){
+                            return this.$notify({
+                                title: '警告',
+                                message: '不要试图寻找我的BUG! ! !',
+                                type: 'warning'
+                            });
+                        }
+                        axios({
+                            method: 'POST',
+                            url: '/personal',
+                            data: {...this.userInfo_page,type: 'change'}
+                        }).then((res)=>{
+                            if(res.data.status===200){
+                                this.$notify({
+                                    title: '个人信息',
+                                    message: res.data['msg']||'修改成功~',
+                                    type: 'success'
+                                });
+                            }else{
+                                this.$notify.error({
+                                    title: '个人信息',
+                                    message: res.data['msg']||'修改失败！'
+                                });
+                            }
+                            this.getUserInfo();
+                        }).catch(()=>{
+                            this.getUserInfo();
+                            this.$notify({
+                                title: '个人信息',
+                                message: '修改失败！请稍后重试~',
+                                type: 'warning'
+                            });
+                        });
+                    });
+                },
+                getUserInfo(){
+                    axios({
+                        method: 'POST',
+                        url: '/personal',
+                        data: {type: 'get'}
+                    }).then((rs)=>{
+                        this.userInfo=rs.data.userInfo;
+                        this.bag.data=rs.data.bag;
+                        this.getGoods();
+                        this.userInfo_page=JSON.parse(JSON.stringify(this.userInfo));
+                    });
+                },
+                changePass(){
+                    if(this.password_page.oldp==''||this.password_page.newp==''||this.password_page.news==''){
+                        return this.$notify({
+                            title: '修改',
+                            message: `不可为空！`,
+                            type: 'warning'
+                        });
+                    }
+                    if(!(this.password_page.newp===this.password_page.news)){
+                        return this.$notify({
+                            title: '修改',
+                            message: `两次输入的密码不一致！`,
+                            type: 'warning'
+                        });
+                    }
+                    if(this.password_page.oldp===this.password_page.news){
+                        return this.$notify({
+                            title: '修改',
+                            message: `原密码不能与现密码相同！`,
+                            type: 'warning'
+                        });
+                    }
+                    if(this.password_page.news.length<6||this.password_page.news.length>18){
+                        return this.$notify({
+                            title: '修改',
+                            message: `密码长度应在6-18位之间`,
+                            type: 'warning'
+                        });
+                    }
+                    this.$confirm('确定要修改密码嘛?','提示',{
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(()=>{
+                        axios({
+                            method: 'POST',
+                            url: '/personal',
+                            data: {type: 'checkPass',password: this.password_page.oldp}
+                        }).then((rs)=>{
+                            if(!(rs.data.status===200)){
+                                return this.$notify.error({
+                                    title: '修改',
+                                    message: `您输入的密码是错的呢~`,
+                                });
+                            }else{
+                                axios({
+                                    method: 'POST',
+                                    url: '/personal',
+                                    data: {type: 'changePass',password: this.password_page.news,oldPassword: this.password_page.oldp}
+                                }).then((rs)=>{
+                                    if(!(rs.data.status===200)){
+                                        return this.$notify.error({
+                                            title: '修改',
+                                            message: `修改失败！[-cdoe: ${rs.data.status}]`
+                                        });
+                                    }
+                                    this.$notify({
+                                        title: '修改',
+                                        message: `修改成功，请重新登录~`,
+                                        type: 'success'
+                                    });
+                                    location.href='/login';
+                                });
+                            }
+                        });
+                    });
+                },
+                changeUsrname(){
+                    if(this.usrname_page.usr==''||this.usrname_page.pwd==''){
+                        return this.$notify({
+                            title: '修改',
+                            message: `不可为空！`,
+                            type: 'warning'
+                        });
+                    }
+                    this.$confirm('确定要修改用户名嘛?','提示',{
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(()=>{
+                        axios({
+                            method: 'POST',
+                            url: '/personal',
+                            data: {type: 'checkPass',password: this.usrname_page.pwd}
+                        }).then((rs)=>{
+                            if(!(rs.data.status===200)){
+                                return this.$notify.error({
+                                    title: '修改',
+                                    message: `您输入的密码是错的呢~`,
+                                });
+                            }else{
+                                axios({
+                                    method: 'POST',
+                                    url: '/personal',
+                                    data: {type: 'changeUser',password: this.usrname_page.pwd,usr: this.usrname_page.usr}
+                                }).then((rs)=>{
+                                    if(!(rs.data.status===200)){
+                                        return this.$notify.error({
+                                            title: '修改',
+                                            message: rs.data.msg||`修改失败！[-cdoe: ${rs.data.status}]`
+                                        });
+                                    }
+                                    this.$notify({
+                                        title: '修改',
+                                        message: `修改成功，请重新登录~`,
+                                        type: 'success'
+                                    });
+                                    location.href='/login';
+                                });
+                            }
+                        });
+                    });
+                },
+                logout(){
+                    axios({
+                        method: 'GET',
+                        url: '/logout'
+                    }).then((rs)=>{
+                        if(rs.status===200){
+                            this.jump('/login',true);
+                        }
+                    });
+                },
+                async search(pn,next=true){
+                    if(typeof pn=='number'&&pn>0){this.searchInfo.pn=pn;}
+                    let key=this.searchInfo.key;
+                    if(!key){key=this.searchInfo._key;}
+                    if(emptyStr(key)===true){
+                        return this.$notify({
+                            title: '搜索',
+                            message: `写上东西再查叭~小2b~`,
+                            type: 'warning'
+                        });
+                    }
+                    let _re=false;
+                    if(next===false){_re=await this.searchTo(key);}else{_re=true;}
+                    this.pageInfo.isLoading=true;
+                    if(_re===false){return this.pageInfo.isLoading=false;}
+                    this.searchInfo._key=key;
+                    await axios({
+                        method: 'POST',
+                        url: '/search',
+                        data: {type: 'search',key,rn: this.searchInfo.rn||5,pn: this.searchInfo.pn||pn}
+                    }).then((rs)=>{
+                        if(emptyArr(rs.data)||rs.data.status!==200){
+                            return this.$notify.error({
+                                title: '搜索',
+                                message: `嗯~我的小本本上什么也没有呢`
+                            });
+                        }
+                        this.searchInfo.data=rs.data.data
+                        this.searchInfo.all=rs.data.all;
+                        this.searchInfo.rn=rs.data.rn||5;
+                        this.searchInfo.pn=rs.data.pn||1;
+                    }).catch(()=>{
+                        return this.$notify.error({
+                            title: '搜索',
+                            message: `好像出问题了呢~~~`
+                        });
+                    });
+                    document.querySelector('#ln_home').scrollTop=0;
+                    this.pageInfo.isLoading=false;
+                },
+                searchTo(key){
+                    return new Promise((resovle)=>{
+                        this.$confirm(`确定要搜索“${key}”?`,'提示',{
+                            confirmButtonText: '确定',
+                            cancelButtonText: '取消',
+                            type: 'warning'
+                        }).then(()=>{
+                            resovle(true);
+                        }).catch(()=>{resovle(false);});
+                    });
+                },
+                lookPic(url){
+                    let mask = document.createElement('div');
+                    mask.style="background: rgba(0,0,0,0.4);width: 100vw;height: 100vh;position: fixed;top: 0;left: 0;z-index: 99999;";
+                    mask.onclick=()=>{mask.remove();pic.remove();};
+                    let pic = document.createElement('div');
+                    pic.style="width: 100vw;height: 100vh;display: flex;justify-content: center;align-items: center;position: fixed;top: 0;left: 0;z-index: 100000;pointer-events: none;";
+                    let img = document.createElement('img');
+                    img.src=url;
+                    img.style="width:100%;z-index: 100001;pointer-events: all;";
+                    let close = document.createElement('div');
+                    close.style="width: 50px;height: 50px;position:fixed;color: #fff;top:10px;right:10px;border-radius:50%;font-size: 30px;text-align: center;line-height: 50px;font-weight: bolder;z-index: 100002;pointer-events: all;cursor: pointer;";
+                    close.innerText='❌';
+                    close.onclick=()=>{pic.remove();mask.remove();};
+                    pic.appendChild(img);
+                    pic.appendChild(close);
+                    document.body.appendChild(mask);
+                    document.body.appendChild(pic);
+                },
+                //每日想我start
+                showday(now){
+                    if(!now){now=new Date();}else{now=now;}
+                    let year=now.getFullYear(),month=now.getMonth()+1;
+                    axios({
+                        method: 'POST',
+                        url: '/qiandao',
+                        data: {type: 2,year,month}
+                    }).then((rs)=>{
+                        if(rs.data.status===200){
+                            this.calendar.days=rs.data.days;
+                            let allday=getMonthAllDay(year,month);
+                            let fistdate=new Date(year,month-1,1).getDay();
+                            let daterow=document.getElementById("day");
+                            this.calendar.year=year;
+                            this.calendar.month=month;
+                            this.calendar.year_month=`${year}年${month}月`;
+                            let qian=false;
+                            if(!daterow){return;}
+                            daterow.innerHTML='';
+                            for(let i=0;i<fistdate;i++){
+                                let dayElement=document.createElement("div");
+                                dayElement.className="evrday";
+                                daterow.appendChild(dayElement);
+                            }
+                            let all=0;
+                            for(let i=1;i<=allday;i++){
+                                let dayElement=document.createElement("div");
+                                dayElement.innerHTML=i;
+                                dayElement.className="evrday";
+                                dayElement.setAttribute('onclick',`ln.selectMonth(${i})`);
+                                if(!(i<new Date().getDate())){all++;}
+                                for(v of this.calendar.days){
+                                    if(v.day==new Date().getDate()) qian=true;
+                                    if(i==v.day) dayElement.style.color="red";
+                                }
+                                daterow.appendChild(dayElement);
+                            }
+                            this.calendar.all=allday-rs.data.days.length-all;
+                            this.selectMonth(new Date().getDate());
+                        }else{
+                            this.$notify.error({
+                                title: '日历',
+                                message: `获取失败！`,
+                            });
+                        }
+                    });
+		            
+	            },
+                next(month,year,next=true){
+                    if(next===true){
+                        if(month<12){month=month+1;}else{
+                            month=1;
+                            year=year+1; 
+                        }
+                    }else{
+                        if(month>1){month=month-1;}else{
+                            month=12;
+                            year=year-1; 
+                        }
+                    }
+                    this.showday(new Date(`${year}-${month}-${new Date().getDate()}`));
+                },
+                selectMonth(day){
+                    let info;
+                    let today=new Date().getDate();
+                    if(typeof day==='object'&&day.day!=undefined&&day.qian!=undefined){
+                        info=day;
+                    }else{
+                        info=this.calendar.days.filter((d)=>d.day===day)[0];
+                        if(!info&&day==today){
+                            //是今天但是没签到
+                            this.calendar.str=`签到`;
+                            this.calendar.className=`red`;
+                            this.calendar.onclick=`签到`;
+                        }else if(!info&&day>new Date().getDate()){
+                            //还没到这天
+                            this.calendar.str='还没到这天呢~';
+                            this.calendar.className=`disabled`;
+                            this.calendar.onclick=`超过`;
+                        }else if(!info&&day<new Date().getDate()){
+                            //以前的未签到
+                            this.calendar.str=`补签(${day}日)`;
+                            this.calendar.className=`red`;
+                            this.calendar.onclick=`补签`;
+                            this.calendar.onclick1=`${day}`;
+                        }
+                    }
+                    if(!info){return;}
+                    if(info.day===today){
+                        //是今天且签到了
+                        this.calendar.str='今日已签到~';
+                        this.calendar.className=`disabled`;
+                        this.calendar.onclick=`已签`;
+                    }else if(typeof info.day==='number'){
+                        //签到了
+                        if((emptyStr(info.liu)===false)){
+                            this.calendar.str=info.liu;
+                            this.calendar.className=`disabled`;
+                            this.calendar.onclick=`已签`;
+                        }else{
+                            if(emptyStr(info.because)===false){
+                                this.calendar.str=info.because;
+                                this.calendar.className=`disabled`;
+                                this.calendar.onclick=`已签`;
+                            }else{
+                                this.calendar.str='这里什么都木有呢~';
+                                this.calendar.className=`disabled`;
+                                this.calendar.onclick=`已签`;
+                            }
+                        }
+                    }else{
+                        this.calendar.str='ERROR~';
+                        this.calendar.className=`red`;
+                        this.calendar.onclick=`ERROR`;
+                    }
+                },
+                qian(type,day=undefined){
+                    switch(type){
+                        case '已签':
+                            this.$notify({
+                                title: '签到',
+                                message: '已经签到啦~还点我干森么(啊啊啊，救命啊~有变态摸我！！啊啊啊)',
+                                type: 'success'
+                            });break;
+                        case '补签': 
+                            //2023/06/09 23:14:44 end
+                            this.$prompt('姐姐老实交代为什么'+day+'号没有签到是为什么捏：', '把借口写在下面~', {
+                                confirmButtonText: '好了',
+                                cancelButtonText: '拉倒',
+                                inputPattern: /^.+$/,
+                                inputErrorMessage: '姐姐系不系又填空格了捏'
+                            }).then(({value})=>{
+                                this.$confirm('确定要补签嘛~','签到',{
+                                    confirmButtonText: '系滴捏~',
+                                    cancelButtonText: '不了',
+                                }).then(()=>{
+                                    axios({
+                                        method: 'POST',
+                                        url: '/qiandao',
+                                        data: {type: 1,day,because: value,year: this.calendar.year||new Date().getFullYear()}
+                                    }).then((rs)=>{
+                                        if(rs.data.status===200){
+                                            this.$notify({
+                                                title: '签到',
+                                                message: rs.data['msg']||'补签成功~以后要早点签到呦~',
+                                                type: 'success'
+                                            });
+                                        }else{
+                                            this.$notify.error({
+                                                title: '签到',
+                                                message: rs.data['msg']||'补签失败！'
+                                            });
+                                        }
+                                        this.showday();
+                                    }).catch(() => {
+                                        this.$notify({
+                                            title: '签到',
+                                            message: '补签失败！',
+                                            type: 'warning'
+                                        });
+                                    });
+                                });
+                            });break;
+                        case '超过':
+                            this.$notify({
+                                title: '签到',
+                                message: '宁似煞笔嘛，到这一天了么你就点，煞笔~',
+                                type: 'warning'
+                            });
+                        break;
+                        case '签到': 
+                            //2023/06/06 22:59:21 end
+                            this.$prompt('姐姐好呀，本人一直都在想姐姐呦，姐姐想不想我呀(由字数觉得姐姐想不想我~)', '写一句话送给我叭~', {
+                                confirmButtonText: '好了',
+                                cancelButtonText: '拉倒',
+                                inputPattern: /^.+$/,
+                                inputErrorMessage: '姐姐系不系又填空格了捏'
+                            }).then(({value})=>{
+                                this.$confirm('真的想我嘛~','签到',{
+                                    confirmButtonText: '系滴捏~',
+                                    cancelButtonText: '才没有',
+                                }).then(()=>{
+                                    axios({
+                                        method: 'POST',
+                                        url: '/qiandao',
+                                        data: {type: 0,liu: value}
+                                    }).then((rs)=>{
+                                        if(rs.data.status===200){
+                                            this.$notify({
+                                                title: '签到',
+                                                message: rs.data['msg']||'签到成功~',
+                                                type: 'success'
+                                            });
+                                        }else{
+                                            this.$notify.error({
+                                                title: '签到',
+                                                message: rs.data['msg']||'签到失败'
+                                            });
+                                        }
+                                        this.showday();
+                                    }).catch(() => {
+                                        this.$notify({
+                                            title: '签到',
+                                            message: '签到失败！',
+                                            type: 'warning'
+                                        });
+                                    });
+                                });
+                            });break;
+                        case 'ERROR':
+                            this.$notify.error({
+                                title: '签到',
+                                message: '蛋糕了~出错了~'
+                            });break;
+                    }
+                },
+                //每日想我end
+                yiyan(){
+                    axios({
+                        method: 'GET',
+                        url: 'https://v1.hitokoto.cn/'
+                    }).then(res => {
+                        this.yan.content = res['data']['hitokoto'];
+                    }).catch(() => {
+                        this.$notify({
+                            title: '一言',
+                            message: '请求错误',
+                            type: 'warning'
+                        });
+                    }).catch(()=>{
+                        this.$notify({
+                            title: '一言',
+                            message: '请求错误',
+                            type: 'warning'
+                        });
+                    });
+                },
+                getSays(){
+                    axios({
+                        method: 'POST',
+                        url: '/says',
+                        data: {type: 'get'}
+                    }).then((rs)=>{
+                        if(rs.data.status===200){
+                            this.says=rs.data.data;
+                        }else{
+                            this.$notify({
+                                title: '她说',
+                                message: `获取失败!`,
+                                type: 'warning'
+                            });
+                        }
+                    }).catch(()=>{
+                        this.$notify({
+                            title: '她说',
+                            message: `获取失败!`,
+                            type: 'warning'
+                        });
+                    });
+                },
+                getSaysth(){
+                    axios({
+                        method: 'POST',
+                        url: '/saysth',
+                        data: {type: 'get'}
+                    }).then((rs)=>{
+                        if(rs.data.status===200){
+                            this.sayth=rs.data.data;
+                        }else{
+                            this.$notify({
+                                title: '对她说',
+                                message: `获取失败!`,
+                                type: 'warning'
+                            });
+                        }
+                    }).catch(()=>{
+                        this.$notify({
+                            title: '对她说',
+                            message: `获取失败!`,
+                            type: 'warning'
+                        });
+                    });
+                },
+                getAllLiuyan(){
+                    axios({
+                        method: 'POST',
+                        url: '/sayme',
+                        data: {type: 'get'}
+                    }).then((rs)=>{
+                        if(rs.data.status===200){
+                            this.liuyan.num=rs.data.num;
+                        }else{
+                            this.$notify({
+                                title: '留言',
+                                message: `获取失败!`,
+                                type: 'warning'
+                            });
+                        }
+                    }).catch(()=>{
+                        this.$notify({
+                            title: '留言',
+                            message: `获取失败!`,
+                            type: 'warning'
+                        });
+                    });
+                },
+                liu(){
+                    let v=this.liuyan.value;
+                    if(emptyStr(v)===true){
+                        return this.$notify({
+                            title: '留言',
+                            message: '想给我发空格啊,没门~',
+                            type: 'warning'
+                        });
+                    }
+                    this.$confirm('要给我发留言嘛?','留言',{
+                        confirmButtonText: '咻~',
+                        cancelButtonText: '不给了',
+                        type: 'warning'
+                    }).then(()=>{
+                        axios({
+                            method: 'POST',
+                            url: '/sayme',
+                            data: {type: 'add',value: v}
+                        }).then((rs)=>{
+                            if(rs.data.status===200){
+                                this.$notify({
+                                    title: '留言',
+                                    message: '收到姐姐滴留言啦~(开心开心😊)',
+                                    type: 'success'
+                                });
+                                this.liuyan.value='';
+                            }else{
+                                this.$notify.error({
+                                    title: '留言',
+                                    message: '留言失败!',
+                                });
+                            }
+                            this.getAllLiuyan();
+                        }).catch(()=>{
+                            this.$notify({
+                                title: '留言',
+                                message: '出错了呢~',
+                                type: 'warning'
+                            });
+                        });
+                    });
+                },
+                lookPaper(){
+                    let pwd=this.paper.value;
+                    if(!pwd||pwd.length<4){
+                        return this.$notify({
+                            title: '小纸条',
+                            message: '好好看看你输入的是什么鬼东东,人家不认识~',
+                            type: 'warning'
+                        });
+                    }
+                    this.$confirm(`确定要查看密钥为 “${pwd}” 的小纸条?`,'小纸条',{
+                        confirmButtonText: '系的',
+                        cancelButtonText: '漏漏漏',
+                        type: 'warning'
+                    }).then(()=>{
+                        axios({
+                            method: 'POST',
+                            url: '/paper',
+                            data: {type: 'look',pwd}
+                        }).then((rs)=>{
+                            if(rs.data.status===200){
+                                this.$alert(`${rs.data.data.content}<br><ii>(${rs.data.data.date})</ii>`||'咦?怎么是空的呢?姐姐把我纸条吃了嘛?','小纸条',{
+                                    dangerouslyUseHTMLString: true,
+                                    confirmButtonText: '看到啦',
+                                });
+                                this.paper.value='';
+                            }else{
+                                this.$notify.error({
+                                    title: '小纸条',
+                                    message: '查看失败!',
+                                });
+                            }
+                            this.getAllLiuyan();
+                        }).catch(()=>{
+                            this.$notify({
+                                title: '小纸条',
+                                message: '出错了呢~',
+                                type: 'warning'
+                            });
+                        });
+                    });
+                },
+                getQue(){
+                    axios({
+                        method: 'POST',
+                        url: '/question',
+                        data: {type: 'get'}
+                    }).then((rs)=>{
+                        if(rs.data.status===200){
+                            this.ques=rs.data.data;
+                        }else{
+                            this.$notify({
+                                title: '你问我答',
+                                message: `获取失败!`,
+                                type: 'warning'
+                            });
+                        }
+                    }).catch(()=>{
+                        this.$notify({
+                            title: '你问我答',
+                            message: `获取失败!`,
+                            type: 'warning'
+                        });
+                    });
+                },
+                answerQue(i){
+                    let v=this.ques[i];
+                    let value=v.value;
+                    let title=v.content;
+                    let id=v.id;
+                    if(emptyStr(value)===true||value.length<=0){
+                        return this.$notify({
+                            title: '你问我答',
+                            message: '系不系又填空格了捏~',
+                            type: 'warning'
+                        });
+                    }
+                    this.$confirm(`真的要回答 “${title}”这个问题嘛 ?`,'你问我答',{
+                        confirmButtonText: '真滴',
+                        cancelButtonText: '我才不',
+                        type: 'warning'
+                    }).then(()=>{
+                        axios({
+                            method: 'POST',
+                            url: '/question',
+                            data: {type: 'answer',value,id}
+                        }).then((rs)=>{
+                            if(rs.data.status===200){
+                                this.$notify({
+                                    title: '你问我答',
+                                    message: '收到姐姐滴回答啦,谢谢~',
+                                    type: 'success'
+                                });
+                                this.getQue();
+                            }else{
+                                this.$notify.error({
+                                    title: '你问我答',
+                                    message: '回答失败!',
+                                });
+                            }
+                            this.getAllLiuyan();
+                        }).catch(()=>{
+                            this.$notify({
+                                title: '你问我答',
+                                message: '出错了呢~',
+                                type: 'warning'
+                            });
+                        });
+                    });
+                },
+                getGuess(){
+                    axios({
+                        method: 'POST',
+                        url: '/guess',
+                        data: {type: 'get'}
+                    }).then((rs)=>{
+                        if(rs.data.status===200){
+                            this.guesses=rs.data.data;
+                        }else{
+                            this.$notify({
+                                title: '猜一猜',
+                                message: `获取失败!`,
+                                type: 'warning'
+                            });
+                        }
+                    }).catch(()=>{
+                        this.$notify({
+                            title: '猜一猜',
+                            message: `获取失败!`,
+                            type: 'warning'
+                        });
+                    });
+                },
+                checkGuess(i){
+                    let v=this.guesses[i];
+                    let value=v.value;
+                    let title=v.content;
+                    let id=v.id;
+                    if(emptyStr(value)===true||value.length<=0){
+                        return this.$notify({
+                            title: '猜一猜',
+                            message: '系不系又填空格了捏~',
+                            type: 'warning'
+                        });
+                    }
+                    this.$confirm(`确定答案是 “${value}”嘛?`,'猜一猜',{
+                        confirmButtonText: '是滴',
+                        cancelButtonText: '不是吧',
+                        type: 'warning'
+                    }).then(()=>{
+                        axios({
+                            method: 'POST',
+                            url: '/guess',
+                            data: {type: 'check',value,id}
+                        }).then((rs)=>{
+                            if(rs.data.status===200){
+                                this.$notify({
+                                    title: '猜一猜',
+                                    message: rs.data.msg||'成功~',
+                                    type: 'success'
+                                });
+                                this.getGuess();
+                            }else{
+                                this.$notify.error({
+                                    title: '猜一猜',
+                                    message: rs.data.msg||'失败!',
+                                });
+                            }
+                            this.getAllLiuyan();
+                        }).catch(()=>{
+                            this.$notify({
+                                title: '猜一猜',
+                                message: '出错了呢~',
+                                type: 'warning'
+                            });
+                        });
+                    });
+                },
+                getGoods(){
+                    axios({
+                        method: 'POST',
+                        url: '/shop',
+                        data: {type: 'getGoods'}
+                    }).then((rs)=>{
+                        if(rs.data.status===200){
+                            this.goods=rs.data.data;
+                            this.shop.isSelected=false;
+                            for(let i=0;i<this.bag.data.length;i++){
+                                let info=this.goods.filter((g)=>{return g.id===this.bag.data[i].id});
+                                this.bag.data[i]['img']=info[0]['img'];
+                            }
+                        }else{
+                            this.$notify({
+                                title: '2kの少破',
+                                message: `啊殴~获取失败!`,
+                                type: 'warning'
+                            });
+                        }
+                    }).catch(()=>{
+                        this.$notify({
+                            title: '2kの少破',
+                            message: `获取失败!`,
+                            type: 'warning'
+                        });
+                    });
+                },
+                addGood(index){
+                    if(this.goods[index].isShow===true){
+                        this.goods[index].value=0;
+                        this.goods[index].isShow=false;
+                        this.shop.isSelected=false;
+                        return;
+                    }
+                    this.goods[index].value=1;
+                    this.goods[index].isShow=true;
+                    this.shop.isSelected=true;
+                    this.howMuch();
+                },
+                howMuch(){
+                    let all=0;
+                    let goods=this.goods.filter((good)=>{return good.isShow==true});
+                    if(!goods){return;}
+                    for(v of goods){
+                        if(parseInt(v['value'])<=0){
+                            v.isShow=false;
+                            if(goods.length===1){
+                                this.shop.isSelected=false;
+                            }
+                        }
+                        all+=parseInt(v['price'])*parseInt(v['value']);
+                    }
+                    this.shop.allPrice=all;
+                    this.shop.afford=true;
+                    if(all>this.userInfo.point){
+                        this.shop.afford=false;
+                    }
+                },
+                jiesuan(){
+                    if(!(this.shop.afford===true&&this.shop.allPrice>0)){
+                        return this.$notify.error({
+                            title: '2kの少破',
+                            message: '有钱么你，姐姐布吉岛掂量掂量寄几几斤几两嘛，快快快，去找我要钱叭~'
+                        })
+                    }
+                    this.$confirm(`确定要用姐姐的<e>${this.shop.allPrice}</e>积分购买嘛?`,'2kの少破',{
+                        confirmButtonText: '是滴呢',
+                        cancelButtonText: '我才不要',
+                        type: 'warning',
+                        dangerouslyUseHTMLString: true
+                    }).then(()=>{
+                        axios({
+                            method: 'POST',
+                            url: '/shop',
+                            data: {type: 'buyGoods',goods: this.goods.filter((good)=>{return good.isShow===true&&good.value>0})}
+                        }).then((rs)=>{
+                            if(rs.data.status===200){
+                                this.$notify({
+                                    title: '2kの少破',
+                                    message: '购买成功~',
+                                    type: 'success'
+                                });
+                                this.getUserInfo();
+                                this.shop.isSelected=false;
+                                this.goods.forEach((good)=>{
+                                    good.isShow=false;
+                                    good.value=undefined;
+                                });
+                            }else{
+                                this.$notify.error({
+                                    title: '2kの少破',
+                                    message: '购买失败!',
+                                });
+                            }
+                        }).catch(()=>{
+                            this.$notify({
+                                title: '2kの少破',
+                                message: '出错了呢~',
+                                type: 'warning'
+                            });
+                        });
+                    });
+                },
+                showGood(id){
+                    this.bag.selectId=id;
+                    this.bag.select=1;
+                    let info=this.goods.filter((b)=>{return b.id===id})[0];
+                    let good={
+                        explanation: info['explanation'],
+                        img: info['img'],
+                        name: info['name'],
+                        price: info['price'],
+                        value: this.bag.data.filter((b)=>{return b.id===id})[0]['value']
+                    }
+                    this.bag.info=good;
+                    document.addEventListener("click",this.closeListen);
+                },
+                closeListen(e){
+                    this.bag.selectId=-1;
+                    this.bag.info=undefined;
+                    document.removeEventListener("click",this.closeListen);
+                },
+                sellGood(i){
+                    this.$confirm('要把介个东东卖了?','出售',{
+                        confirmButtonText: '系滴',
+                        cancelButtonText: '我不',
+                        type: 'warning'
+                    }).then(()=>{
+                        this.$notify.error({
+                            title: '出售',
+                            message: '姐姐觉得有人买嘛，嘿嘿~没人买姐姐的，姐姐寄几留着叭~'
+                        });
+                    });
+                },
+                useGood(i){
+                    //原本想做滑动选择的(技术不行啊)
+                    this.$prompt('备注','使用',{
+                        confirmButtonText: '好了',
+                        cancelButtonText: '算了啦'
+                    }).then(({value})=>{
+                        axios({
+                            method: 'POST',
+                            url: '/shop',
+                            data: {type: 'useGood',id: i,remark: value}
+                        }).then((rs)=>{
+                            if(rs.data.status===200){
+                                this.$notify({
+                                    title: '使用',
+                                    message: '使用成功~(请等你爹爹我看到消息~)',
+                                    type: 'success'
+                                });
+                            }else{
+                                this.$notify.error({
+                                    title: '使用',
+                                    message: '使用失败呢~截图给我说叭~'
+                                });
+                            }
+                            this.getUserInfo();
+                        });
+                    });
+                }
+            }
+        });
+    </script>
+</html>
+14:50:10 
