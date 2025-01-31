@@ -34,7 +34,7 @@ class Personal extends Model{
 				'description'=>$data['description'],
 				'headsolt'=>$data['headsolt']
 			]);
-			if(!($re<0)){return json_encode(['status'=>200,'msg'=>'修改成功~']);}
+			if(!($re<0)){return json_encode(['status'=>200,'msg'=>'修改成功']);}
 			return json_encode(['status'=>-200,'msg'=> '修改失败！']);
 		}
         return json_encode(['status'=>-200,'msg'=> '信息错误，禁止修改！']);
@@ -68,7 +68,7 @@ class Personal extends Model{
         if(!(json_decode($this->checkPass($oldPwd),true)['status']===200)){return json_encode(['status'=>-200,'msg'=>'原密码错误！']);}
 		$info=Db::name('login')->where('id','=',session('uid'))->update(['pwd'=>$pwd]);
 		session_destroy();
-		return json_encode(['status'=>$info==0?-200:200,'msg'=>$info==0?'修改失败！':'修改成功~']);
+		return json_encode(['status'=>$info==0?-200:200,'msg'=>$info==0?'修改失败！':'修改成功']);
 	}
 	public function changeUser($pwd,$usr){
 		if(empty($pwd)||empty($usr)){return json_decode(['status'=>-200,'msg'=>'参数不全，无法修改！']);}
@@ -77,7 +77,7 @@ class Personal extends Model{
         if($info['usr']===$usr){return json_encode(['status'=>-200,'msg'=>'用户名未更改']);}
 		$info=Db::name('login')->where('id','=',session('uid'))->update(['usr'=>$usr]);
 		session_destroy();
-		return json_encode(['status'=>$info==0?-200:200,'msg'=>$info==0?'修改失败！':'修改成功~']);
+		return json_encode(['status'=>$info==0?-200:200,'msg'=>$info==0?'修改失败！':'修改成功']);
 	}
     public function point($num){
         if(!session('uid')||!is_int($num)){return false;}

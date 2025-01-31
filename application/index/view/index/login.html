@@ -48,7 +48,7 @@
             padding: 26px 24px 0 24px;
             padding-bottom: 0!important;
         }
-        /* --2023/06/03 17:50:20复制粘贴完毕 */
+        /* --2023/06/03 17:50:20 */
     </style>
 </head>
 <body>
@@ -82,8 +82,8 @@
                         pwd: ''
                     },
                     logins:{
-                        usr:{required: true,message: '姐姐，写个账号普拉斯~',trigger: 'blur'},
-                        pwd:{required: true,message: '把密码填一下叭~',trigger: 'blur'}
+                        usr:{required: true,message: '请输入账号',trigger: 'blur'},
+                        pwd:{required: true,message: '请输入密码',trigger: 'blur'}
                     }
                 }
             },
@@ -99,7 +99,7 @@
                                 if(rs.data&&rs.data.status&&rs.data.status===200){
                                     this.$notify({
                                         title: '登录',
-                                        message: `登录成功,正在为您跳转中~`,
+                                        message: `登录成功，请等待跳转`,
                                         type: 'success'
                                     });
                                     setTimeout(()=>{

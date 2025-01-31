@@ -17,7 +17,6 @@ use traits\controller\Jump;
 class Controller
 {
     use Jump;
-
     /**
      * 视图类实例
      * @var \think\View

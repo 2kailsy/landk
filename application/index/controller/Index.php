@@ -76,7 +76,7 @@ class Index extends Controller {
     public function logout(){
         $login=new Login();
         $login->logout();
-        return json_encode(['status'=>200,'msg'=>'已登出~']);
+        return json_encode(['status'=>200,'msg'=>'已登出']);
     }
     public function picture(){
         if(!session('uid')||!session('username')){$this::error("请登录！",url('/login'));}

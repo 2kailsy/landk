@@ -16,10 +16,10 @@ function upload($file,$folder){
         $img=$info->getSaveName();
         $imgs=str_replace('\\','/',$img);
         $path='/uploads/'.$folder.'/'.$imgs;
-        return json_encode(['status'=>200,'msg'=>'上传成功~','path'=>$path]);
+        return json_encode(['status'=>200,'msg'=>'上传成功','path'=>$path]);
     }else{
         //上传失败
-        return json_encode(['status'=>-200,'msg'=>'上传失败~']);
+        return json_encode(['status'=>-200,'msg'=>'上传失败']);
     }
 }
 /**
@@ -74,7 +74,7 @@ function sendUseGoodMail($to,$id,$explanation='没有备注'){
             </div>
         </section>
         <footer style="text-align: center;color: #999999;font-size: 14px;">
-            <p style="margin-bottom: 4px;">Copyright © 2021 - 2023 2kweb.</p>
+            <p style="margin-bottom: 4px;">Copyright © 2021 - 2025 2kweb.</p>
             <p style="margin-top: 0;">All Rights Reserved. 2k 版权所有</p>
         </footer>
     </div>';

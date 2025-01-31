@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>2k の 照片墙</title>
 	<style>
@@ -238,12 +238,8 @@
 				method: 'POST',
 				url: `/picture`
 			}).then((rs)=>{
-				if(rs.data.length>0){
-					this.pictures=rs.data;
-				}
-			}).then(()=>{
-				this.sort(-1);
-			});
+				if(rs.data.length>0){this.pictures=rs.data;}
+			}).then(()=>{this.sort(-1);});
 		},
 		methods:{
 			lookPic(url){
@@ -271,9 +267,7 @@
 			turn(i){
 				let classList=this.$refs['photo_'+i][0].classList;
 				let className=classList.value;
-				if(className.indexOf('photo_center')==-1){
-					return this.sort(i);
-				}
+				if(className.indexOf('photo_center')==-1){return this.sort(i);}
 				if(className.indexOf('photo_front')!=-1&&className.indexOf('photo_center')!=-1){
 					classList.remove('photo_front');
 					classList.add('photo_back');
@@ -362,9 +356,7 @@
 				return range;
 			}
 		},
-		watch:{
-			isShow(v){if(v===true){this.sort(0);}}
-		},
+		watch:{isShow(v){if(v===true){this.sort(0);}}},
 		data(){
 			return{
 				isShow: false,
@@ -372,7 +364,7 @@
 					title: '暂无',
 					time: new Date(),
 					imageUrl: '/static/img/lan.gif',
-					content: '我还没有添加照片呢~过会再来叭~'
+					content: '暂无照片'
 				}]
 			}
 		}

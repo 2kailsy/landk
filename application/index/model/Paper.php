@@ -6,8 +6,12 @@ class Paper extends Model{
 	public function look($pwd){
         $paper=Db::query("SELECT `content`,`date`,`look` FROM `paper` WHERE `pwd`=$pwd");
         $time=date('Y-m-d H:i:s');
-        $look=$paper[0]['look'].'||'.$time;
-        Db::query("UPDATE `paper` SET `look`='$look' WHERE `paper`.`pwd`=$pwd;");
-        return json_encode(['status'=>200,'msg'=>'查看成功~','data'=>['content'=>$paper[0]['content'],'date'=>$paper[0]['date']]]);
+        try{
+            $look=$paper[0]['look'].'||'.$time;
+            Db::query("UPDATE `paper` SET `look`='$look' WHERE `paper`.`pwd`=$pwd;");
+            return json_encode(['status'=>200,'msg'=>'查看成功','data'=>['content'=>$paper[0]['content'],'date'=>$paper[0]['date']]]);
+        }catch(\Throwable $th){
+            return json_encode(['status'=>-200,'msg'=>'小纸条不存在~(￣▽￣)~*']);
+        }
 	}
 }
