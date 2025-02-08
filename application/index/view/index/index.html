@@ -554,9 +554,9 @@
                 <h1 class="ln_title border_title t_center">LSY 💕 NZK</h1>
                 <div class="ln_content" style="padding-top: 18px;padding-bottom: 18px;">
                     <div class="landk_top">
-                        <img src="/static/img/picture/k.png">
+                        <img src="/static/img/uploads/user/k.png">
                         <div class="love_box"><div class="love"></div></div>
-                        <img src="/static/img/picture/y.png">
+                        <img src="/static/img/uploads/user/y.png">
                     </div>
                     <h2 st="2022,6,25,9:29:52" id="lovet" class="jishi"></h2>
                     <h2 st="2022,10,06,13:44:02" id="lovef" class="jishi"></h2>
@@ -564,20 +564,6 @@
                 </div>
             </div>
             <!-- LSY 💕 NZK end(爱心+图片：2023/06/10 09:58:06)(记时：2023/06/10 13:47:52)(end：2023/06/10 13:59:35) -->
-            <!-- 欠条 strat(2023/06/10 14:00:04) -->
-            <div class="ln_box">
-                <h1 class="ln_title border_title t_center">欠条</h1>
-                <div class="ln_content">
-                    <h2 st="2022,8,22,21:56:22" id="qt" class="jishi" style="margin-top: 0;"></h2>
-                </div>
-            </div>
-            <div class="ln_box" style="display: none;">
-                <h1 class="ln_title border_title t_center">欠条(于2022-10-07 10:10:00归还 9分30秒 id：4532)</h1>
-                <div class="ln_content">
-                    <h2 st="2022,8,22,21:56:22" id="qt1" class="jishi" style="margin-top: 0;"></h2>
-                </div>
-            </div>
-            <!-- 欠条 end(第一个：2023/06/10 14:03:34)(第二个：2023/06/10 14:05:46) -->
             <!-- 少破 start(2023/06/11 16:20:44) -->
             <div class="ln_box" v-show="goods.length>0" style="position: relative;">
                 <h1 class="ln_title border_title t_center">
@@ -877,11 +863,6 @@
                         color: 'red',
                         size: 18,
                         time: '2022/09/10 13:55:00'
-                    },{
-                        content: '对不起',
-                        color: 'red',
-                        size: 18,
-                        time: '2022/12/02 16:27:14'
                     }],
                     calendar: {
                         year_month: '',
@@ -983,12 +964,6 @@
                     data: {type: 'addSee'}
                 });
                 this.showday();
-                setInterval(()=>{
-                    ltime('lovef','和<e>刘思雨</e>假装分手的第</br>',null,null);
-                    ltime('lovet','和<e>刘思雨</e>在一起的第</br>',null,null);
-                    ltime('qt',null,'一边亲一边抱我我不撒口也不撒手',660);
-                    ltime('qt1',null,'任我处置',300);
-                },1000);
                 this.yiyan();
                 this.getSays();
                 this.getSaysth();
@@ -1368,7 +1343,7 @@
                     if(typeof day==='object'&&day.day!=undefined&&day.qian!=undefined){
                         info=day;
                     }else{
-                        info=this.calendar.days.filter((d)=>d.day===day)[0];
+                        info=this.calendar.days.filter((d)=>d.day==day)[0];
                         if(!info&&day==today&&month==m&&year==y){
                             //是今天但是没签到
                             this.calendar.str=`签到`;
@@ -1379,7 +1354,7 @@
                             this.calendar.str='还没到这天';
                             this.calendar.className=`disabled`;
                             this.calendar.onclick=`超过`;
-                        }else{
+                        }else if(!info&&new Date().getTime()>(new Date(`${year}-${month}-${day}`)).getTime()){
                             //以前的未签到
                             this.calendar.str=`补签(${day}日)`;
                             this.calendar.className=`red`;
@@ -1393,7 +1368,7 @@
                         this.calendar.str='今日已签到';
                         this.calendar.className=`disabled`;
                         this.calendar.onclick=`已签`;
-                    }else if(typeof info.day==='number'){
+                    }else{
                         //签到了
                         if((emptyStr(info.liu)===false)){
                             this.calendar.str=info.liu;
@@ -1410,10 +1385,6 @@
                                 this.calendar.onclick=`已签`;
                             }
                         }
-                    }else{
-                        this.calendar.str='ERROR';
-                        this.calendar.className=`red`;
-                        this.calendar.onclick=`ERROR`;
                     }
                 },
                 qian(type,day=undefined){

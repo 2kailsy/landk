@@ -11,12 +11,16 @@
 
 // 应用公共文件
 function upload($file,$folder){
-    $info = $file->validate(['size'=>815678,'ext'=>'jpg,png,gif,jpeg,ico'])->move('../public/uploads/'.$folder);
+    $info=$file->validate(['size'=>815678,'ext'=>'jpg,png,gif,jpeg,ico,avif'])->move('../public/static'.$folder);
     if($info){
-        $img=$info->getSaveName();
-        $imgs=str_replace('\\','/',$img);
-        $path='/uploads/'.$folder.'/'.$imgs;
-        return json_encode(['status'=>200,'msg'=>'上传成功','path'=>$path]);
+        try{
+            $img=$info->getSaveName();
+            $imgs=str_replace('\\','/',$img);
+            $path='/static'.$folder.'/'.$imgs;
+            return json_encode(['status'=>200,'msg'=>'上传成功','path'=>$path]);
+        }catch(Exception $e){
+            return json_encode(['status'=>-200,'msg'=>'上传失败','e'=>$e]);
+        }
     }else{
         //上传失败
         return json_encode(['status'=>-200,'msg'=>'上传失败']);
@@ -29,14 +33,14 @@ function upload($file,$folder){
   * @param string $content：邮件内容
   * @return boolean  true:发送成功 false:发送失败
 */
-use app\index\model\Settings;
-use app\index\model\Shop;
-use app\index\model\Personal;
-function sendUseGoodMail($to,$id,$explanation='没有备注'){
+use app\index\model\index\Settings;
+use app\index\model\index\Shop;
+use app\index\model\index\Personal;
+function sendUseGoodMail($to,$good,$explanation='没有备注'){
     $mail=new PHPMailer\PHPMailer\PHPMailer();
     $mail->isSMTP();
     $setting=new Settings();
-    $settings=json_decode($setting->get(true),true);
+    $settings=json_decode($setting->getPass(),true);
     if(!$to){$to=$settings['mail_admin'];}
     if(!$explanation){$explanation='没有备注';}
     $mail->Host=$settings['mail_host'];
@@ -50,17 +54,15 @@ function sendUseGoodMail($to,$id,$explanation='没有备注'){
     $userId=session('uid');
     $user=new Personal();
     $userName=json_decode($user->get($userId),true)['userInfo']['nickname'];
-    $shop=new Shop();
-    $good=json_decode($shop->getGood($id),true)['data'];
     $goodName=$good['name'];
     $goodImg=$good['img'];
-    // $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-    // $uri = $_SERVER['REQUEST_URI'];
-    // $url = $protocol . $_SERVER['HTTP_HOST'];
-    // $goodImg=$url.'/static/img/shops/fenshouka.png';
+    $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+    $uri = $_SERVER['REQUEST_URI'];
+    $url = $protocol . $_SERVER['HTTP_HOST'];
+    $goodImg=$url.$goodImg;
     $html= '<div style="width: 100%;height: 100%;background: #ffffff;display: flex;flex-direction: column;align-items: center;">
         <header style="display: flex;align-items: center;width: 100%;padding: 0px 8px;box-sizing: border-box;">
-            <img src="/logo.png" height="160">
+            <img src="'.$url.'/logo.png" height="160">
             <p style="flex: 1;"></p>
         </header>
         <section style="background-color: #f7f8fa;width: 100%;padding: 12px 12px;box-sizing: border-box;">
@@ -83,4 +85,72 @@ function sendUseGoodMail($to,$id,$explanation='没有备注'){
     $mail->Subject='使用商品';
     $mail->Body=$html;
     if($mail->send()){return true;}else{return false;}
+}
+// 不移除 0，只移除 false、null、''
+function filterCallback($value){return $value!==false&&$value!==null&&$value!=='';}
+/**
+ * 获取星座
+ * @param int $month 阳历月份
+ * @param int $day   阳历日
+ * @return string|bool 星座名称或 false（如果日期无效）
+ */
+function getConstellation($month,$day){
+    $month=(int)$month;
+    $day=(int)$day;
+    $lastDay=($day<=30);
+    $febDay=(($month==2)&&($day<=29));
+    $res=null;
+    switch($month){
+        case 1:
+            if($day<=19){$res='摩羯座';}
+            else if($day>=20){$res='水瓶座';}break;
+        case 2:
+            if($day<=18){$res='水瓶座';}
+            else if($day>=19&&$febDay){$res='双鱼座';}break;
+        case 3:
+            if($day<=20){$res='双鱼座';}
+            else if($day>=21){$res='白羊座';}break;
+        case 4:
+            if($day<=19){$res='白羊座';}
+            else if($day>=20&&$lastDay){$res='金牛座';}break;
+        case 5:
+            if($day<=20){$res='金牛座';}
+            else if($day>=21){$res='双子座';}break;
+        case 6:
+            if($day<=21){$res='双子座';}
+            else if($day>=22&&$lastDay){$res='巨蟹座';}break;
+        case 7:
+            if($day<=22){$res='巨蟹座';}
+            else if($day>=23){$res='狮子座';}break;
+        case 8:
+            if($day<=22){$res='狮子座';}
+            else if($day>=23){$res='处女座';}break;
+        case 9:
+            if($day<=22){$res='处女座';}
+            else if($day>=23&&$lastDay){$res='天秤座';}break;
+        case 10:
+            if($day<=23){$res='天秤座';}
+            else if($day>=24){$res='天蝎座';}break;
+        case 11:
+            if($day<=22){$res='天蝎座';}
+            else if($day>=23&&$lastDay){$res='射手座';}break;
+        case 12:
+            if($day<=21){$res='射手座';}
+            else if($day>=22){$res='摩羯座';}break;
+        default:return false;
+    }
+    return $res?:'日期无效';
+}
+/**
+ * 根据阳历生日计算年龄（周岁）
+ * @param string $birthday 阳历生日，格式为 'Y-m-d'（如 '1990-05-15'）
+ * @return int|null 返回年龄（失败返回 null）
+ */
+function calculateAge($birthday){
+    try{
+        $birthDate=new DateTime($birthday);
+        $today=new DateTime('today');
+        $interval=$today->diff($birthDate);
+        return $interval->y;
+    }catch(Exception $e){return null;}
 }

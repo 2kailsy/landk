@@ -15,11 +15,11 @@ return [
     // 服务器地址
     'hostname'        => '127.0.0.1',
     // 数据库名
-    'database'        => 'landk',
+    'database'        => 'bpt4pbi2k',
     // 用户名
-    'username'        => 'root',
+    'username'        => 'bpt4pbi2k',
     // 密码
-    'password'        => 'gshBxBJMBtbDrYb4',
+    'password'        => '7sao0fil',
     // 端口
     'hostport'        => '3306',
     // 连接dsn

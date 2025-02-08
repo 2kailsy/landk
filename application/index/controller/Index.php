@@ -1,39 +1,24 @@
 <?php
 namespace app\index\controller;
 use think\Controller;
-use app\index\model\Login;
-use app\index\model\Settings;
-use app\index\model\Personal;
-use app\index\model\Picture;
-use app\index\model\Search;
-use app\index\model\Sign;
-use app\index\model\Say;
-use app\index\model\Saysth;
-use app\index\model\Sayme;
-use app\index\model\Paper;
-use app\index\model\Ques;
-use app\index\model\Guess;
-use app\index\model\Shop;
+use app\index\model\index\Settings;
+use app\index\model\index\Personal;
+use app\index\model\index\Picture;
+use app\index\model\index\Search;
+use app\index\model\index\Sign;
+use app\index\model\index\Says;
+use app\index\model\index\Saysth;
+use app\index\model\index\Sayme;
+use app\index\model\index\Paper;
+use app\index\model\index\Ques;
+use app\index\model\index\Guess;
+use app\index\model\index\Shop;
 header("Content-Type: text/html;charset=utf-8");
 header('Access-Control-Allow-Origin:*');//允许跨域
 class Index extends Controller {
-    public function index($type='index'){
-        if(!session('uid')||!session('username')){$this::error("请登录！",url('/login'));}
-        return $this->fetch('index');
-    }
-    public function login(){
-        if(request()->isPost()){
-			$login=new Login();
-			$data=input('post.');
-			$num=$login->login($data['usr'],$data['pwd']);
-			if($num==3){
-				return json_encode(['status'=>200,'msg'=>'登录成功']);
-			}else{return json_encode(['status'=>-200,'msg'=>'用户名或密码错误']);}
-		}
-        return $this->fetch('login');
-    }
+    protected function initialize(){if((!session('uid')&&session('uid')!=0)||!session('username')){$this::error("请登录！",url('/login'));}}
+    public function index($type='index'){return $this->fetch('index');}
     public function settings(){
-        if(!session('uid')||!session('username')){$this::error("请登录！",url('/login'));}
         if(request()->isPost()){
 			$setting=new Settings();
 			$data=input('post.');
@@ -44,7 +29,6 @@ class Index extends Controller {
         }
     }
     public function personal(){
-        if(!session('uid')||!session('username')){$this::error("请登录！",url('/login'));}
         if(request()->isPost()){
 			$personal=new Personal();
 			$data=input('post.');
@@ -60,12 +44,14 @@ class Index extends Controller {
         }
     }
     public function upload($type){
-        if(!session('uid')||!session('username')){$this::error("请登录！",url('/login'));}
         switch($type){
-            case 'user': $floder='user';break;
+            case 'user': $floder='/img/uploads/user';break;
+            case 'about': $floder='/img/uploads/about';break;
+            case 'shops': $floder='/img/uploads/shops';break;
+            case 'picture': $floder='/img/uploads/picture';break;
             default: $floder='unknow';break;
         }
-        if(strcmp($floder,'unknow')===1){
+        if($floder!=='unknow'){
             $file=request()->file('file');
             $path=upload($file,$floder);
             echo $path;
@@ -73,13 +59,7 @@ class Index extends Controller {
             echo json_encode(['status'=>404,'msg'=>'未知路径']);
         }
     }
-    public function logout(){
-        $login=new Login();
-        $login->logout();
-        return json_encode(['status'=>200,'msg'=>'已登出']);
-    }
     public function picture(){
-        if(!session('uid')||!session('username')){$this::error("请登录！",url('/login'));}
         if(request()->isPost()){
             $pic=new Picture();
             return $pic->get();
@@ -87,7 +67,6 @@ class Index extends Controller {
         return $this->fetch('picture');
     }
     public function search(){
-        if(!session('uid')||!session('username')){$this::error("请登录！",url('/login'));}
         if(request()->isPost()){
             $search=new Search();
             $data=input('post.');
@@ -100,7 +79,6 @@ class Index extends Controller {
         }
     }
     public function qiandao(){
-        if(!session('uid')||!session('username')){$this::error("请登录！",url('/login'));}
         if(request()->isPost()){
             $qiandao=new Sign();
             $data=input('post.');
@@ -113,9 +91,8 @@ class Index extends Controller {
         }
     }
     public function says(){
-        if(!session('uid')||!session('username')){$this::error("请登录！",url('/login'));}
         if(request()->isPost()){
-            $say=new Say();
+            $say=new Says();
             $data=input('post.');
             switch($data['type']){
                 case 'get': $says=$say->get();break;
@@ -124,7 +101,6 @@ class Index extends Controller {
         }
     }
     public function saysth(){
-        if(!session('uid')||!session('username')){$this::error("请登录！",url('/login'));}
         if(request()->isPost()){
             $saysth=new Saysth();
             $data=input('post.');
@@ -135,7 +111,6 @@ class Index extends Controller {
         }
     }
     public function sayme(){
-        if(!session('uid')||!session('username')){$this::error("请登录！",url('/login'));}
         if(request()->isPost()){
             $me=new Sayme();
             $data=input('post.');
@@ -147,7 +122,6 @@ class Index extends Controller {
         }
     }
     public function paper(){
-        if(!session('uid')||!session('username')){$this::error("请登录！",url('/login'));}
         if(request()->isPost()){
             $paper=new Paper();
             $data=input('post.');
@@ -158,7 +132,6 @@ class Index extends Controller {
         }
     }
     public function question(){
-        if(!session('uid')||!session('username')){$this::error("请登录！",url('/login'));}
         if(request()->isPost()){
             $ques=new Ques();
             $data=input('post.');
@@ -170,7 +143,6 @@ class Index extends Controller {
         }
     }
     public function guess(){
-        if(!session('uid')||!session('username')){$this::error("请登录！",url('/login'));}
         if(request()->isPost()){
             $guess=new Guess();
             $data=input('post.');
@@ -182,7 +154,6 @@ class Index extends Controller {
         }
     }
     public function shop(){
-        if(!session('uid')||!session('username')){$this::error("请登录！",url('/login'));}
         if(request()->isPost()){
             $shop=new Shop();
             $data=input('post.');
