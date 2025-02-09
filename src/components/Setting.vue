@@ -18,9 +18,9 @@ export default {
                 k: [
                     { required: true, message: "请输入设置名称", trigger: "blur" },
                     {
-                        min: 3,
+                        min: 2,
                         max: 80,
-                        message: "设置名称应在3-80个字符之间",
+                        message: "设置名称应在2-80个字符之间",
                         trigger: "blur",
                     },
                 ]
