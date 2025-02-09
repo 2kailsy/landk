@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>2k の 照片墙</title>
+	<style>
+		*{margin: 0;padding: 0;}
+        *::-webkit-scrollbar{display: none;}
+		body{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			overflow: hidden;
+		}
+		#pic{
+			width: 100%;
+			height: 100vh;
+			position: absolute;
+			top: 0;
+			background-color: #333;
+			overflow: hidden;
+		}
+		.navBar{
+			width: 80%;
+			height: 30px;
+			line-height: 30px;
+			position: absolute;
+			left: 10%;
+			top: 80px;
+			z-index: 999;
+			text-align: center;
+            display: flex;
+            overflow: hidden;
+            overflow-x: overlay;
+		}
+		.navBar>i{
+			width: 30px;
+			height: 30px;
+			display: inline-block;
+			background-color: rgb(170, 170, 170);
+			border-radius: 50%;
+			transition-duration: 500ms;
+			transition-delay: 0ms;
+			-webkit-transform: scale(0.5);
+			-webkit-transition: all 0.5s;
+			-moz-transform: scale(0.5);
+			-moz-transition: all 0.5s;
+			transition: all 0.5s;
+			cursor: pointer;
+            flex-shrink: 0;
+		}
+		.navBar>i.i_current{
+			transform: scale(0.8);
+		}
+		.navBar>i.i_back{
+			background: rgb(85, 85, 85);
+			transform: rotateY(-180deg) scale(0.8);
+			-webkit-transform: rotateY(-180deg) scale(0.8);
+			-moz-transform: rotateY(-180deg) scale(0.8);
+		}
+		.photo{
+			width: 260px;
+			height: 320px;
+			position: absolute;
+			z-index: 1;
+			box-shadow: 0 0 1px rgba(0,0,0,.01);
+			-webkit-transition: all 0.6s;
+			-moz-transition: all 0.6s;
+			left: 50%;
+			top: 50%;
+			margin: -160px 0 0 -130px;
+		}
+		.photo .side {
+			width: 100%;
+			/* height: 100%; */
+			background-color: #eee;
+			position: absolute;
+			top: 0;
+			right: 0;
+			padding: 20px;
+			box-sizing: border-box;
+		}
+		.photo .side-front .image{
+			width: 100%;
+			height: 250px;
+			line-height: 250px;
+			overflow: hidden;
+		}
+		.photo .side-front .image img{
+			width: 100%;
+		}
+		.photo_center {
+			left: 50%;
+			top: 50%;
+			margin: -160px 0 0 -130px;
+			z-index: 999;
+		}
+		.photo .side-front .caption{
+			text-align: center;
+			font-size: 24px;
+			line-height: 50px;
+			font-weight: bolder;
+		}
+		.photo .side-back .desc{
+			color: #666;
+			font-size: 16px;
+			line-height: 1.5em;
+			word-break: break-all;
+		}
+		.photo .side-back .time{
+			color: #c8c8c8;
+			font-size: 12px;
+			line-height: 1.5em;
+			word-break: break-all;
+			position: absolute;
+			bottom: 8px;
+			right: 8px;
+			width: 60%;
+		}
+		.photo .side-back .desc::first-letter{
+			color: #ff9999;
+			padding-left: calc(16px * 2);
+			font-size: 22px;
+			font-weight: bolder;
+		}
+		.photo-wrap {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			transform-style: preserve-3d;
+			-webkit-transform-style: preserve-3d;
+			transition: all 0.6s;
+			-webkit-transition: all 0.6s;
+			transform-style: preserve-3d;
+			-moz-transform-style: preserve-3d;
+			transition: all 0.6s;
+			-moz-transition: all 0.6s;
+		}
+		.photo-wrap .side-front {
+			transform: rotate(0deg);
+			-webkit-transform: rotateY(0deg);
+			-moz-transform: rotateY(0deg);
+		}
+		.photo-wrap .side-back {
+			transform: rotate(180deg);
+			-webkit-transform: rotateY(180deg);
+			-moz-transform: rotateY(180deg);
+            height: 100%;
+		}
+		.photo-wrap .side {
+			backface-visibility: hidden;
+			-webkit-backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+		}
+		.photo_front .photo-wrap {
+			transform: rotate(0deg);
+			-webkit-transform: rotateY(0deg);
+			-moz-transform: rotateY(0deg);
+		}
+		.photo_back .photo-wrap {
+			transform: rotate(180deg);
+			-webkit-transform: rotateY(180deg);
+			-moz-transform: rotateY(180deg);
+		}
+		.mask{
+			transition: .8s;
+		}
+		.mask::before{
+			content: '';
+			position: absolute;
+			z-index: 999999999999;
+			background-color: rgba(0,0,0,0.5);
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			transition: .8s;
+		}
+		.mask::after{
+			content: '查看';
+			position: absolute;
+			z-index: 999999999999;
+			height: 40px;
+			border: 5px solid #fff;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			color: #fff;
+			padding: 0 24px;
+			cursor: pointer;
+			transition: .8s;
+		}
+		.fanhui{
+			position: absolute;
+			left: 50%;
+			bottom: 50%;
+			transform: translate(-50%,50%);
+		}
+	</style>
+</head>
+<body>
+	<a href="../" style="position: absolute; top: 20px; left: 20px; z-index: 999;"><svg t="1672361485765" viewBox="0 0 1024 1024" p-id="2683" width="50" height="100%" class="icon"><path d="M675.328 117.717333A425.429333 425.429333 0 0 0 512 85.333333C276.352 85.333333 85.333333 276.352 85.333333 512s191.018667 426.666667 426.666667 426.666667 426.666667-191.018667 426.666667-426.666667c0-56.746667-11.093333-112-32.384-163.328a21.333333 21.333333 0 0 0-39.402667 16.341333A382.762667 382.762667 0 0 1 896 512c0 212.074667-171.925333 384-384 384S128 724.074667 128 512 299.925333 128 512 128c51.114667 0 100.8 9.984 146.986667 29.12a21.333333 21.333333 0 0 0 16.341333-39.402667z m-324.693333 373.013334l174.464-174.485334a21.141333 21.141333 0 0 0-0.192-29.973333 21.141333 21.141333 0 0 0-29.973334-0.192l-208.256 208.256a20.821333 20.821333 0 0 0-6.122666 14.976c0.042667 5.418667 2.133333 10.837333 6.314666 14.997333l211.178667 211.2a21.141333 21.141333 0 0 0 29.973333 0.213334 21.141333 21.141333 0 0 0-0.213333-29.973334l-172.629333-172.629333 374.997333 2.602667a20.693333 20.693333 0 0 0 21.034667-21.034667 21.482667 21.482667 0 0 0-21.333334-21.333333l-379.242666-2.624z" fill="#ec87c0" p-id="2684"></path></svg></a>
+	<div id="pic" ref="ln_picture">
+		<div class="mask" @click="isShow=true;" v-show="!isShow"></div>
+		<div class="photo photo_front" :ref="`photo_${i}`"  v-for="(img,i) in pictures">
+			<div class="photo-wrap">
+				<div class="side side-front">
+					<p class="image" @click="lookPic(img.imageUrl)">
+						<img :src="img.imageUrl">
+					</p>
+					<p class="caption" @click="turn(i)">{{img.title}}</p>
+				</div>
+				<div class="side side-back">
+					<p class="desc">{{img.content}}</p>
+					<p class="time">{{img.time}}</p>
+				</div>
+			</div>
+		</div>
+		<nav ref="navBar" class="navBar" v-show="isShow"></nav>
+	</div>
+</body>
+<script src="/static/js/vue.js"></script>
+<script src="/static/js/axios.js"></script>
+<script>
+	// 2023/06/06 19:15:31 页面功能ok，开始写后端接口拿数据
+    // 2023/06/06 19:48:05 全部ok(就差主页了)
+	let pic=new Vue({
+		el: '#pic',
+		mounted(){
+			axios({
+				method: 'POST',
+				url: `/picture`
+			}).then((rs)=>{
+				if(rs.data.length>0){this.pictures=rs.data;}
+			}).then(()=>{this.sort(-1);});
+		},
+		methods:{
+			lookPic(url){
+				let mask = document.createElement('div');
+				mask.style="background: rgba(0,0,0,0.4);width: 100vw;height: 100vh;position: fixed;top: 0;left: 0;z-index: 99999;";
+				mask.onclick=()=>{mask.remove();pic.remove();};
+				let pic = document.createElement('div');
+				pic.style="width: 100vw;height: 100vh;display: flex;justify-content: center;align-items: center;position: fixed;top: 0;left: 0;z-index: 100000;pointer-events: none;";
+				let img = document.createElement('img');
+				img.src=url;
+				img.style="width:100%;z-index: 100001;pointer-events: all;";
+				let close = document.createElement('div');
+				close.style="width: 50px;height: 50px;position:fixed;color: #fff;top:10px;right:10px;border-radius:50%;font-size: 30px;text-align: center;line-height: 50px;font-weight: bolder;z-index: 100002;pointer-events: all;cursor: pointer;";
+				close.innerText='❌';
+				close.onclick=()=>{pic.remove();mask.remove();};
+				pic.appendChild(img);
+				pic.appendChild(close);
+				document.body.appendChild(mask);
+				document.body.appendChild(pic);
+			},
+			random(range){
+				let diff=Math.max(range[0],range[1]) - Math.min(range[0], range[1]);
+				return Math.floor(Math.random()*diff+Math.min(range[0], range[1]));
+			},
+			turn(i){
+				let classList=this.$refs['photo_'+i][0].classList;
+				let className=classList.value;
+				if(className.indexOf('photo_center')==-1){return this.sort(i);}
+				if(className.indexOf('photo_front')!=-1&&className.indexOf('photo_center')!=-1){
+					classList.remove('photo_front');
+					classList.add('photo_back');
+					document.querySelector('#nav_'+i).classList.add('i_back');
+				}else{
+					classList.remove('photo_back');
+					classList.add('photo_front');
+					document.querySelector('#nav_'+i).classList.remove('i_back');
+				}
+			},
+			sort(n){
+				let _pic=document.getElementsByClassName('photo');
+				let photos=[];
+				this.$refs['navBar'].innerHtml='';
+				document.querySelector('.navBar').innerHTML='';
+				for(i=0;i<_pic.length;i++){
+					_pic[i].classList.remove('photo_center','photo_front','photo_back');
+					_pic[i].classList.add('photo_front');
+					_pic[i].style.left='';
+					_pic[i].style.top='';
+					_pic[i].style.transform='';
+					_pic[i].style['-webkit-transform']='';
+				}
+				for(i=0;i<_pic.length;i++){
+					_pic[i].classList.remove('photo_center','photo_front','photo_back');
+					_pic[i].classList.add('photo_front');
+					if(i===n){
+						_pic[n].classList.add('photo_center');
+					}else{
+						photos.push(_pic[i]);
+						_pic[i].style.left='';
+						_pic[i].style.top='';
+						_pic[i].style['transform'] = 'rotate(360deg) scale(1.3)';
+						_pic[i].style['-webkit-transform'] = 'rotate(360deg) scale(1.3)';
+					}
+					let ie=document.createElement('i');
+					ie.id='nav_'+i;
+					if(i===n){
+						ie.innerHTML='<svg class="fanhui" viewBox="0 0 1024 1024" width="20" height="20"><path d="M164.224 632.064a41.216 41.216 0 0 0 46.016 35.84c22.464-2.496 38.08-23.872 35.328-46.784l-11.904-89.344c25.984 17.664 55.168 32.256 83.648 44.608a520.96 520.96 0 0 0 196.032 38.848c69.376 0 135.68-14.208 196.608-38.848a522.624 522.624 0 0 0 167.104-111.296 43.2 43.2 0 0 0 0-58.752 41.408 41.408 0 0 0-58.88 0 449.408 449.408 0 0 1-139.2 94.08 454.016 454.016 0 0 1-165.696 31.36c-57.792 0-114.048-11.52-164.736-31.36a476.864 476.864 0 0 1-68.544-37.12l95.936-12.8a40.512 40.512 0 0 0 35.392-45.952 41.472 41.472 0 0 0-46.272-35.392l-188.352 25.536c-9.344 0-18.56 4.48-26.112 11.648a44.8 44.8 0 0 0-11.904 36.672l25.536 189.056z" fill="#fff"></path></svg>';	
+					}
+					ie.setAttribute('onclick',`pic.turn(${i})`);
+					this.$refs['navBar'].appendChild(ie);
+				}
+				let photos_left = photos.splice(0, Math.ceil(photos.length/2));
+  				let photos_right = photos;
+				let ranges = this.range(n);
+				for(let i=0;i<photos_left.length;i++){
+					photos_left[i].style.left = this.random(ranges.left.x) + "px";
+					photos_left[i].style.top = this.random(ranges.left.y) + "px";
+					photos_left[i].style['transform'] = 'rotate('+this.random([-150,150])+'deg) scale(1)';
+					photos_left[i].style['-webkit-transform'] = 'rotate('+this.random([-150,150])+'deg) scale(1)';
+				}
+				for(let i=0;i<photos_right.length;i++){
+					photos_right[i].style.left = this.random(ranges.right.x) + "px";
+					photos_right[i].style.top = this.random(ranges.right.y) + "px";
+					photos_right[i].style['transform'] = 'rotate('+this.random([-150,150])+'deg) scale(1)';
+					photos_right[i].style['-webkit-transform'] = 'rotate('+this.random([-150,150])+'deg) scale(1)';
+				}
+				let navs=this.$refs['navBar'].getElementsByTagName('i');
+				for(let i=0;i<navs.length;i++) {
+					navs[i].classList.remove('i_current');
+					navs[i].classList.remove('i_back');
+				}
+				navs[n].classList.add('i_current')
+			},
+			range(i=0){
+				let range={left:{x:[],y:[]},right:{x:[],y:[]}};
+				let wrap={
+					width: this.$refs['ln_picture'].clientWidth,
+					height: this.$refs['ln_picture'].clientHeight
+				}
+				let photo={
+					width: document.querySelector(".photo").clientWidth,
+					height: document.querySelector(".photo").clientHeight
+				}
+				range.left.x = [0,((wrap.width/2)-(photo.width/2))];
+				range.left.y = [0,((wrap.height)-(photo.width/2))];
+				range.right.x = [((wrap.width/2)+(photo.width/2)),wrap.width];
+				range.right.y = [0,((wrap.height)-(photo.width/2))];
+				if(i&&i===-1){
+					range.left.x = [0,((wrap.width)-(photo.width))];
+					range.left.y = [0,((wrap.height)-(photo.width))];
+					range.right.x = [((wrap.width)+(photo.width)),wrap.width];
+					range.right.y = [0,((wrap.height)-(photo.width))];
+				}
+				return range;
+			}
+		},
+		watch:{isShow(v){if(v===true){this.sort(0);}}},
+		data(){
+			return{
+				isShow: false,
+				pictures: [{
+					title: '暂无',
+					time: new Date(),
+					imageUrl: '/static/img/lan.gif',
+					content: '暂无照片'
+				}]
+			}
+		}
+	});
+</script>
+</html>

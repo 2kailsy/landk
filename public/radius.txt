@@ -1,0 +1,3 @@
+.ln_box,.radius,.ln_search,ln_content>img{border-radius:8px;}
+.ln_content>.ln_form.radius .ln_input{border-bottom-left-radius:0;border-bottom-right-radius:0;}
+.ln_content>.ln_form.radius .ln_btn{border-top-left-radius:0;border-top-right-radius:0;border-bottom-left-radius:inherit;}

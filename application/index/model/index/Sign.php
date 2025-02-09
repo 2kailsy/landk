@@ -1,0 +1,39 @@
+<?php
+namespace app\index\model\index;
+use think\Model;
+use think\Db;
+use app\index\model\index\Personal;
+class Sign extends Model{
+    public function buqian($day,$month,$year,$because){
+        $day=(int)$day<10?'0'.$day:$day;
+        $month=(int)$month<10?'0'.$month:$month;
+        $ac=$year.'-'.$month;
+        $signs=Db::query("SELECT * FROM `sign` WHERE `day`='$day' AND `ac`='$ac'");
+        if(count($signs)>0){
+            return json_encode(['status'=>-200,'ax'=>$ac,'msg'=>'已签到!']);
+        }else{
+            $time=Date('Y-m-d H:i:s');
+            Db::query("INSERT INTO `sign` (`day`, `sign`, `time`, `ac`, `because`, `liu`) VALUES ('$day',NULL,'$time','$ac','$because',NULL);");
+            return json_encode(['status'=>200,'msg'=>'补签成功']);
+        }
+	}
+    public function qiandao($liu){
+        if(empty($liu)){return json_encode(['status'=>-200,'msg'=>'参数不全！']);}
+        $dd=Date('d');
+        $ac=Date('Y-m');
+        $signs=Db::query("SELECT * FROM `sign` WHERE `day`='$dd' AND `ac`='$ac'");
+        if(count($signs)>0){return json_encode(['status'=>-200,'msg'=>'已签到!']);}
+        $time=Date('Y-m-d H:i:s');
+        $person=new Personal();
+        if(!$person->point(1)){return json_encode(['status'=>-200,'msg'=>'失败！']);}
+        $signs=Db::query("INSERT INTO `sign` (`day`, `sign`, `time`, `ac`, `because`, `liu`) VALUES ('$dd',NULL,'$time','$ac',NULL,'$liu');");
+        return json_encode(['status'=>200,'msg'=>'签到成功']);
+	}
+    public function get($year,$month){
+        if(empty($year)||empty($month)){return json_decode(['status'=>-200,'msg'=>'参数不全']);}
+        $mm=$month<10?'0'.$month:$month;
+        $ac=$year.'-'.$mm;
+        $signs=Db::query("SELECT * FROM `sign` WHERE `ac`='$ac'");
+        return json_encode(['status'=>200,'msg'=>'获取成功','days'=>$signs]);
+	}
+}

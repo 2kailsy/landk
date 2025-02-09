@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>登录</title>
+    <meta name="description" content="login page">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="/static/css/elementUI.css">
+    <style>
+        *{margin: 0;padding: 0;}
+        body{
+            background: url('/static/img/login_bg.jpg') no-repeat;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            background-size: 100% 100%;
+            background-attachment: fixed;
+        }
+        .login{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .sub{
+            display: flex;
+            width: 100%;
+        }
+        .sub > .el-form-item__content{
+            display: flex;
+            width: 100%;
+        }
+        .el-card{
+            margin-bottom: 50px;
+            width: 100%;
+            max-width: 250px;
+        }
+        .el-form-item__label::before{display: none;}
+        .login-ruleForm{
+            display: flex;
+            flex-direction: column;
+        }
+        .el-card__body{
+            padding: 26px 24px 0 24px;
+            padding-bottom: 0!important;
+        }
+        /* --2023/06/03 17:50:20 */
+    </style>
+</head>
+<body>
+    <div class="login">
+        <el-card shadow="hover" style="max-width: 250px;">
+            <el-form :model="login" :rules="logins" ref="login" label-width="40px" class="login-ruleForm">
+                <el-form-item label="账号" prop="usr">
+                    <el-input v-model="login.usr" @keyup.enter.native="submitForm('login')" name="usr" auto-complete="on"></el-input>
+                </el-form-item>
+                <el-form-item label="密码" prop="pwd">
+                    <el-input v-model="login.pwd" @keyup.enter.native="submitForm('login')" show-password></el-input>
+                </el-form-item>
+                <el-form-item class="sub">
+                    <el-button type="primary" @click="submitForm('login')" style="flex: 1;">登录</el-button>
+                    <el-button @click="resetForm('login')">重置</el-button>
+                </el-form-item>
+            </el-form>
+        </el-card>
+    </div>
+</body>
+    <script src="/static/js/vue.js"></script>
+    <script src="/static/js/elementUI.js"></script>
+    <script src="/static/js/axios.js"></script>
+    <script>
+        new Vue({
+            el: '.login',
+            data(){
+                return {
+                    login:{
+                        usr: '',
+                        pwd: ''
+                    },
+                    logins:{
+                        usr:{required: true,message: '请输入账号',trigger: 'blur'},
+                        pwd:{required: true,message: '请输入密码',trigger: 'blur'}
+                    }
+                }
+            },
+            methods:{
+                submitForm(formName){
+                    this.$refs[formName].validate((valid)=>{
+                        if(valid){
+                            axios({
+                                method: 'POST',
+                                url: './login',
+                                data: this.login
+                            }).then((rs)=>{
+                                if(rs.data&&rs.data.status&&rs.data.status===200){
+                                    this.$notify({
+                                        title: '登录',
+                                        message: `登录成功，请等待跳转`,
+                                        type: 'success'
+                                    });
+                                    setTimeout(()=>{
+                                        location.href="./";
+                                    },2000);
+                                }else{
+                                    this.$notify({
+                                        title: '登录',
+                                        message: `${rs.data.msg||`登录失败！[-code: ${rs.data.status||521}]`}`,
+                                        type: 'warning'
+                                    });
+                                }
+                            }).catch((e)=>{
+                                this.$notify.error({
+                                    title: '登录',
+                                    message: `请求失败！[-code: ${e.request.status||521}]`
+                                });
+                            });
+                        }
+                    });
+                },
+                resetForm(formName){
+                    this.$refs[formName].resetFields();
+                }
+            },
+            mounted(){
+                axios({
+                    method: 'GET',
+                    url: './'
+                }).then((rs)=>{
+                    if(rs.data.indexOf('请登录！')==-1){
+                        this.$notify({
+                            title: '登录',
+                            message: `欢迎~`,
+                            type: 'success'
+                        });
+                        location.href='./';
+                    }
+                });
+            }
+        });
+    </script>
+</html>
+<!-- 2023/06/03 18:22:58写完 -->
