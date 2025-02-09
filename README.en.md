@@ -38,6 +38,7 @@ Language : [简体中文](./README.md) | English
     ![Home Page](./screenshoot/index-full.png)
     - Home Page (Mobile)
     ![Home Page 1](./screenshoot/index.png)
+    ![Home Page 1-1](./screenshoot/index-4.png)
     ![Home Page 2](./screenshoot/index-1.png)
     ![Home Page 3](./screenshoot/index-2.png)
     ![Home Page 4](./screenshoot/index-3.png)

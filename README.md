@@ -38,6 +38,7 @@
     ![主页](./screenshoot/index-full.png)
     - 主页(移动端)
     ![主页1](./screenshoot/index.png)
+    ![主页1-1](./screenshoot/index-4.png)
     ![主页2](./screenshoot/index-1.png)
     ![主页3](./screenshoot/index-2.png)
     ![主页4](./screenshoot/index-3.png)
